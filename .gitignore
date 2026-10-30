@@ -42,3 +42,6 @@ next-env.d.ts
 
 # inspiration screenshots
 /inspo
+
+# Playwright MCP debug files
+.playwright-mcp/

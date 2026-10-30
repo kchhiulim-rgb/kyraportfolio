@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "nohup bash -c 'npm run dev & sleep 3 && open -a \"Google Chrome\" http://localhost:3000' > /dev/null 2>&1 &"
+          }
+        ]
+      }
+    ]
+  }
+}

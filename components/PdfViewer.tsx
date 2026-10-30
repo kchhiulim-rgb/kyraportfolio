@@ -16,7 +16,14 @@ export default function PdfViewer({ src, title }: PdfViewerProps) {
         </p>
       )}
       <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
-        <PDFViewer src={src} />
+        <PDFViewer
+          src={src}
+          disabledCategories={[
+            'annotation',
+            'redaction',
+            'form',
+          ]}
+        />
       </div>
     </div>
   );
