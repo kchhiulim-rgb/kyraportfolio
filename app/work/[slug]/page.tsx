@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -32,7 +33,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
+async function ProjectContent({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -188,5 +189,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         </div>
       </div>
     </div>
+  );
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  return (
+    <Suspense fallback={
+      <div className="px-6 md:px-12 py-8 md:py-12 max-w-[1800px] mx-auto">
+        <div className="font-space-grotesk text-sm text-gray-400">Loading project...</div>
+      </div>
+    }>
+      <ProjectContent params={params} />
+    </Suspense>
   );
 }

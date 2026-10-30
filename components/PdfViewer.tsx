@@ -1,11 +1,32 @@
 'use client';
 
 import { PDFViewer } from '@embedpdf/viewer-react';
+import { chromeHelpers } from '@embedpdf/viewer';
 
 interface PdfViewerProps {
   src: string;
   title?: string;
 }
+
+// Remove all editing commands, keeping only viewing tools (zoom, scroll, rotate, document ops)
+const editingCommands = [
+  'mode:annotate',
+  'mode:shapes',
+  'mode:insert',
+  'mode:form',
+  'mode:redact',
+  'annotation:delete',
+  'annotation:comment',
+  'annotation:style',
+  'annotation:group',
+  'annotation:ungroup',
+  'annotation:link',
+  'annotation:goto-link',
+  'annotation:remove-link',
+  'panel:annotation-style',
+  'panel:redaction',
+  'panel:comment',
+];
 
 export default function PdfViewer({ src, title }: PdfViewerProps) {
   return (
@@ -18,11 +39,8 @@ export default function PdfViewer({ src, title }: PdfViewerProps) {
       <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
         <PDFViewer
           src={src}
-          disabledCategories={[
-            'annotation',
-            'redaction',
-            'form',
-          ]}
+          disabledCategories={['annotation', 'mode']}
+          chrome={(base) => chromeHelpers.removeItems(base, editingCommands)}
         />
       </div>
     </div>
