@@ -17,6 +17,8 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
   const scrollRef = useRef<HTMLDivElement>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  // Track which videos have been tapped (to hide thumbnail/play overlay on mobile)
+  const [tappedVideos, setTappedVideos] = useState<Set<number>>(new Set());
 
   // Drag-to-scroll state
   const [isDragging, setIsDragging] = useState(false);
@@ -117,7 +119,22 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
     const dy = Math.abs(touch.clientY - touchStartYRef.current);
     // If movement is small, it's a tap — play/pause the video
     if (dx < 10 && dy < 10) {
-      handleClick(index);
+      const video = videoRefs.current[index];
+      if (video) {
+        // Ensure muted for mobile autoplay policy
+        video.muted = true;
+        if (video.paused) {
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+        // Mark as tapped to hide overlays
+        setTappedVideos((prev) => {
+          const next = new Set(prev);
+          next.add(index);
+          return next;
+        });
+      }
     }
   }, []);
 
@@ -205,7 +222,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                 className="w-full h-full object-cover"
               />
               {/* Thumbnail overlay */}
-              {videoItem.thumbnail && (
+              {videoItem.thumbnail && !tappedVideos.has(index) && (
                 <div
                   className="absolute inset-0 overflow-hidden pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity"
                 >
@@ -217,7 +234,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                 </div>
               )}
               {/* Play overlay */}
-              {videoItem.thumbnail && (
+              {videoItem.thumbnail && !tappedVideos.has(index) && (
                 <div
                   className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity"
                 >
