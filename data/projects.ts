@@ -316,7 +316,7 @@ export const projects: Project[] = [
       {
         title: "Moodboard",
         content: "",
-        images: ["/projects/dp5/moodboard.png"],
+        images: ["/projects/dp5/moodboard.webp"],
       },
       {
         title: "Magazine Spreads",
@@ -423,7 +423,7 @@ export const projects: Project[] = [
       {
         title: "Mood Board",
         content: "",
-        images: ["/projects/cid-cinema/mood-board.png"],
+        images: ["/projects/cid-cinema/mood-board.webp"],
       },
       {
         title: "",
@@ -433,12 +433,12 @@ export const projects: Project[] = [
       {
         title: "",
         content: "",
-        images: ["/projects/cid-cinema/poster-watermark.png"],
+        images: ["/projects/cid-cinema/poster-watermark.webp"],
       },
       {
         title: "",
         content: "",
-        images: ["/projects/cid-cinema/social-post.png"],
+        images: ["/projects/cid-cinema/social-post.webp"],
       },
       {
         title: "",

@@ -10,7 +10,7 @@ export default function Header() {
         </Link>
         <Link href="/" className="block flex-shrink-0 cursor-pointer">
           <Image
-            src="/logo.png"
+            src="/logo.webp"
             alt="Kyra Chhiu-Lim"
             width={180}
             height={140}
