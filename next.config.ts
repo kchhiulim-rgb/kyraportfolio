@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
     qualities: [75, 100],
     dangerouslyAllowSVG: true,
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.squarespace-cdn.com",
+        port: "",
+        pathname: "/content/**",
+        search: "",
+      },
+    ],
   },
   turbopack: {
     rules: {
