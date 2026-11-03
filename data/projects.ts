@@ -344,7 +344,7 @@ export const projects: Project[] = [
     role: "Art Director",
     description:
       "13th Annual Film Festival",
-    year: "2023",
+    year: "2025",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",

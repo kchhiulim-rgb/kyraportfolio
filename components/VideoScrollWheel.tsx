@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 
 export interface VideoItem {
   src: string;
@@ -22,6 +22,18 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(0);
   const scrollLeftRef = useRef(0);
+
+  // Arrow visibility state
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+
+  const checkArrowVisibility = useCallback(() => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const { scrollLeft, scrollWidth, clientWidth } = container;
+    setShowLeftArrow(scrollLeft > 5);
+    setShowRightArrow(scrollLeft < scrollWidth - clientWidth - 5);
+  }, []);
 
   const handleScroll = () => {
     const container = scrollRef.current;
@@ -45,6 +57,21 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
     }
 
     setActiveIndex(closestIndex);
+    checkArrowVisibility();
+  };
+
+  // Check arrow visibility on mount and resize
+  useEffect(() => {
+    checkArrowVisibility();
+    window.addEventListener('resize', checkArrowVisibility);
+    return () => window.removeEventListener('resize', checkArrowVisibility);
+  }, [checkArrowVisibility]);
+
+  const scrollDirection = (direction: 'left' | 'right') => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const cardWidth = direction === 'left' ? 260 : 260; // approximate card width + gap on mobile
+    container.scrollBy({ left: direction === 'left' ? -cardWidth : cardWidth, behavior: 'smooth' });
   };
 
   const handleMouseEnter = (index: number) => {
@@ -102,6 +129,30 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
 
   return (
     <div className="relative">
+      {/* Left arrow indicator */}
+      {showLeftArrow && (
+        <button
+          onClick={() => scrollDirection('left')}
+          className="md:hidden absolute left-0 top-1/2 -translate-y-1/2 z-10 w-8 h-16 flex items-center justify-center bg-gradient-to-r from-black/60 to-transparent rounded-r-lg"
+          aria-label="Scroll left"
+        >
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+      )}
+      {/* Right arrow indicator */}
+      {showRightArrow && (
+        <button
+          onClick={() => scrollDirection('right')}
+          className="md:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 w-8 h-16 flex items-center justify-center bg-gradient-to-l from-black/60 to-transparent rounded-l-lg"
+          aria-label="Scroll right"
+        >
+          <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+      )}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
@@ -109,14 +160,13 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeaveContainer}
-        className={`flex gap-4 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+        className={`flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', userSelect: isDragging ? 'none' : 'auto' }}
       >
         {videos.map((videoItem, index) => (
           <div
             key={index}
-            className="flex-shrink-0 snap-start"
-            style={{ width: '380px' }}
+            className="flex-shrink-0 snap-start w-[240px] md:w-[380px]"
           >
             <div
               className="relative rounded-xl overflow-hidden bg-black aspect-[9/16] cursor-pointer group"
