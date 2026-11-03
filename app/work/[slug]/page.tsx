@@ -205,7 +205,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       {(section.content || "").split("\n\n").map((paragraph, j) => (
                         <p
                           key={j}
-                          className="font-body text-sm leading-relaxed font-normal"
+                          className="font-body text-base leading-relaxed font-normal"
                         >
                           {paragraph}
                         </p>
@@ -221,7 +221,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       {(nextSection.content || "").split("\n\n").map((paragraph, j) => (
                         <p
                           key={j}
-                          className="font-body text-sm leading-relaxed font-normal"
+                          className="font-body text-base leading-relaxed font-normal"
                         >
                           {paragraph}
                         </p>
@@ -353,7 +353,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     {section.content.split("\n\n").map((paragraph, j) => (
                       <p
                         key={j}
-                        className="font-body text-sm leading-relaxed font-normal"
+                        className="font-body text-base leading-relaxed font-normal"
                       >
                         {paragraph}
                       </p>
@@ -500,7 +500,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                   {section.content.split("\n\n").map((paragraph, j) => (
                       <p
                         key={j}
-                        className="font-body text-[1.125em] leading-relaxed font-normal"
+                        className="font-body text-base leading-relaxed font-normal"
                       >
                         {paragraph}
                       </p>

@@ -116,7 +116,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
           <div
             key={index}
             className="flex-shrink-0 snap-start"
-            style={{ width: '280px' }}
+            style={{ width: '380px' }}
           >
             <div
               className="relative rounded-xl overflow-hidden bg-black aspect-[9/16] cursor-pointer group"

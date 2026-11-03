@@ -207,7 +207,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                   {section.content.split('\n\n').map((paragraph, j) => (
                     <p
                       key={j}
-                      className="font-body text-[1.125em] leading-relaxed font-normal"
+                      className="font-body text-base leading-relaxed font-normal"
                     >
                       {paragraph}
                     </p>
@@ -286,7 +286,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                 {section.content.split('\n\n').map((paragraph, j) => (
                   <p
                     key={j}
-                    className="font-body text-[1.125em] leading-relaxed font-normal"
+                    className="font-body text-base leading-relaxed font-normal"
                   >
                     {paragraph}
                   </p>
