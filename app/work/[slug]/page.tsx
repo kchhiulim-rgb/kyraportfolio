@@ -202,7 +202,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       {section.title}
                     </h3>
                     <div className="space-y-4">
-                      {section.content.split("\n\n").map((paragraph, j) => (
+                      {(section.content || "").split("\n\n").map((paragraph, j) => (
                         <p
                           key={j}
                           className="font-body text-sm leading-relaxed font-normal"
@@ -218,7 +218,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       {nextSection.title}
                     </h3>
                     <div className="space-y-4">
-                      {nextSection.content.split("\n\n").map((paragraph, j) => (
+                      {(nextSection.content || "").split("\n\n").map((paragraph, j) => (
                         <p
                           key={j}
                           className="font-body text-sm leading-relaxed font-normal"
@@ -454,8 +454,8 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
           }
 
           // Check if this is the mockup standalone section - render with same margins as pocket gif
-          const isMockupStandalone = !section.title && !section.content && section.images && section.images.length === 1 && section.images[0].includes('print/mockup');
-          if (isMockupStandalone) {
+          const isMockupStandalone = !section.title && !section.content && section.images?.length === 1 && section.images[0].includes('print/mockup');
+          if (isMockupStandalone && section.images) {
             return (
               <div key={i} className="mb-12 md:mb-16">
                 <ClickableImage src={section.images[0]} alt="Poster mockup">

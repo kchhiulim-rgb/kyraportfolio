@@ -29,6 +29,13 @@ export interface Project {
       images: string[];
     }[];
     isCompactText?: boolean;
+    stacked?: boolean;
+    padding?: string;
+    overlap?: { background: string; overlay: string };
+    afterOverlap?: string[];
+    firstRow?: string;
+    secondRow?: string[];
+    isStatsBox?: boolean;
   }[];
 }
 
@@ -166,6 +173,7 @@ export const projects: Project[] = [
       },
       {
         title: "Merchandise",
+        content: "",
         stacked: true,
         padding: "pl-16 md:pl-24 pr-16 md:pr-24",
         images: [

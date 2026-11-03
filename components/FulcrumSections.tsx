@@ -239,7 +239,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                       {img.endsWith('.pdf') ? (
                         <PdfSection src={img} />
                       ) : img.endsWith('.mp4') ? (
-                        <video src={img} className="w-full h-auto rounded-lg" muted autoplay loop playsInline />
+                        <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
                       ) : img.endsWith('.gif') ? (
                         <HoverToPlayGif src={img} alt={`Project image ${j + 1}`} autoplay={img.includes('tote-gif') || img.includes('valentines-day-card')} />
                       ) : isFullResImage ? (
