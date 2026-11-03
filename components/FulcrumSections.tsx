@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import PdfSection from './PdfSection';
 import HoverToPlayGif from './HoverToPlayGif';
@@ -61,6 +61,22 @@ interface FulcrumSectionsProps {
 export default function FulcrumSections({ sections, isFulcrum }: FulcrumSectionsProps) {
   const [muted, setMuted] = useState(true);
   const toggleMute = () => setMuted(prev => !prev);
+  // Popup modal for video expand
+  const [popupVideo, setPopupVideo] = useState<string | null>(null);
+  const popupVideoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (popupVideo !== null && popupVideoRef.current) {
+      popupVideoRef.current.play().catch(() => {});
+    }
+  }, [popupVideo]);
+
+  const closePopup = useCallback(() => {
+    if (popupVideoRef.current) {
+      popupVideoRef.current.pause();
+    }
+    setPopupVideo(null);
+  }, []);
 
   return (
     <>
@@ -239,7 +255,9 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                       {img.endsWith('.pdf') ? (
                         <PdfSection src={img} />
                       ) : img.endsWith('.mp4') ? (
-                        <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
+                        <div key={j} className="cursor-pointer" onClick={() => setPopupVideo(img)}>
+                          <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
+                        </div>
                       ) : img.endsWith('.gif') ? (
                         <HoverToPlayGif src={img} alt={`Project image ${j + 1}`} autoplay={img.includes('tote-gif') || img.includes('valentines-day-card')} />
                       ) : isFullResImage ? (
@@ -341,11 +359,16 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                     const isAutoplay = img.includes('world-cup');
                     if (isAutoplay) {
                       return (
-                        <AutoplayVideo
+                        <div
                           key={j}
-                          src={img}
-                          className="w-full h-auto rounded-lg"
-                        />
+                          className="cursor-pointer"
+                          onClick={() => setPopupVideo(img)}
+                        >
+                          <AutoplayVideo
+                            src={img}
+                            className="w-full h-auto rounded-lg"
+                          />
+                        </div>
                       );
                     }
                     return (
@@ -515,6 +538,39 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
           </div>
         );
       })}
+      {/* Popup modal for video expand */}
+      {popupVideo !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+          onClick={closePopup}
+        >
+          {/* Close button */}
+          <button
+            onClick={closePopup}
+            className="absolute top-4 right-4 z-50 w-10 h-10 md:w-12 md:h-12 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center"
+            aria-label="Close video"
+          >
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          {/* Video container */}
+          <div
+            className="relative w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              ref={(el) => { popupVideoRef.current = el; }}
+              src={popupVideo}
+              muted={muted}
+              playsInline
+              loop
+              autoPlay
+              className="max-w-full max-h-[90vh] object-contain"
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 }
