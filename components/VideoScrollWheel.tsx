@@ -263,17 +263,17 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
               {/* Fullscreen button — visible on mobile and desktop */}
               <button
                 onClick={(e) => { e.stopPropagation(); setPopupIndex(index); }}
-                className="absolute top-2 right-2 w-14 h-14 md:w-8 md:h-8 rounded-full bg-black/60 md:bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                className="absolute top-2 right-2 w-10 h-10 md:w-8 md:h-8 rounded-full bg-black/60 md:bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
                 aria-label="Open fullscreen"
               >
-                <svg className="w-6 h-6 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 md:w-4 md:h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
                 </svg>
               </button>
               {/* Volume toggle button — always visible on mobile, hover on desktop */}
               <button
                 onClick={(e) => { e.stopPropagation(); onToggleMute?.(); }}
-                className="absolute top-2 right-16 w-10 h-10 md:w-8 md:h-8 rounded-full bg-black/60 md:bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
+                className="absolute top-2 right-12 w-10 h-10 md:w-8 md:h-8 rounded-full bg-black/60 md:bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
                 aria-label={muted ? 'Unmute videos' : 'Mute videos'}
               >
                 {muted ? (
