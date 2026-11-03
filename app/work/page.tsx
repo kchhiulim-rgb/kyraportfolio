@@ -8,27 +8,27 @@ export const metadata = {
 
 export default function WorkPage() {
   return (
-    <div className="min-h-[calc(100vh)] bg-repeat-y" style={{ backgroundImage: 'url("/paper-texture.jpg")' }}>
+    <div className="min-h-[calc(100vh)]">
       <div className="max-w-[1800px] mx-auto">
         {projects.map((project) => (
           <section key={project.slug} className="py-8 md:py-12">
             {/* Project Image */}
-            <div className="w-full flex items-center justify-center">
+            <div className="max-w-[1400px] mx-auto">
               <Link href={`/work/${project.slug}`} className="block cursor-pointer">
                 <HoverImage
                   src={project.coverImage}
                   alt={project.title}
-                  className="w-[1400px] aspect-[4/3]"
+                  className="w-full aspect-[4/3]"
                 />
               </Link>
             </div>
 
             {/* Project Title + Category - Center */}
-            <div className="text-center mt-6">
+            <div className="text-center mt-6 max-w-[1400px] mx-auto">
               <h2 className="font-heading font-bold text-lg md:text-xl">
                 {project.title}
               </h2>
-              <p className="font-body text-xs text-gray-600 mt-0.5 tracking-wide">
+              <p className="font-body text-xs text-gray-600 mt-0.5 tracking-wide uppercase font-bold">
                 {project.description}
               </p>
             </div>

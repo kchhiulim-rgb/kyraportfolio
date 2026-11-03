@@ -1,0 +1,48 @@
+- generic [active] [ref=f10e1]:
+  - banner [ref=f10e2]:
+    - navigation [ref=f10e3]:
+      - link "About" [ref=f10e4] [cursor=pointer]:
+        - /url: /about
+      - link [ref=f10e5] [cursor=pointer]:
+        - /url: /
+        - img "Kyra Chhiu-Lim" [ref=f10e6]
+      - link "Featured Work" [ref=f10e7] [cursor=pointer]:
+        - /url: /work
+  - main [ref=f10e8]:
+    - generic [ref=f10e9]:
+      - generic [ref=f10e10]:
+        - img "13th Annual Seattle Asian American Film Festival" [ref=f10e15] [cursor=pointer]
+        - generic [ref=f10e16]:
+          - heading "Seattle Asian American Film Festival" [level=1] [ref=f10e17]
+          - paragraph [ref=f10e18]: 13th Annual Film Festival
+          - generic [ref=f10e19]
+        - generic [ref=f10e33]:
+          - heading "Moodboard" [level=3] [ref=f10e34]
+          - img "Moodboard 1" [ref=f10e37] [cursor=pointer]
+        - generic [ref=f10e38]:
+          - heading "Print" [level=3] [ref=f10e39]
+          - img "Print 1" [ref=f10e42] [cursor=pointer]
+        - img "Project image 1" [ref=f10e46] [cursor=pointer]
+        - generic [ref=f10e49]:
+          - img "Jowinski poster" [ref=f10e51]
+          - img "Badge mockup" [ref=f10e53]
+        - generic [ref=f10e54]:
+          - heading "Social" [level=3] [ref=f10e55]
+          - generic [ref=f10e56]
+      - generic [ref=f10e73]:
+        - link "Disposable Parts 5th Edition" [ref=f10e74] [cursor=pointer]:
+          - /url: /work/dp5
+          - heading "Disposable Parts 5th Edition" [level=3] [ref=f10e77]
+        - link "C-ID Summer Cinema" [ref=f10e78] [cursor=pointer]:
+          - /url: /work/c-id-summer-cinema
+          - heading "C-ID Summer Cinema" [level=3] [ref=f10e79]
+  - contentinfo [ref=f10e83]:
+    - generic [ref=f10e84]:
+      - link "FEATURED WORK" [ref=f10e86] [cursor=pointer]:
+        - /url: /work
+      - link "Other Works" [ref=f10e88] [cursor=pointer]:
+        - /url: /other-work
+      - link "kyrachhiulim@gmail.com" [ref=f10e90] [cursor=pointer]:
+        - /url: mailto:kyrachhiulim@gmail.com
+  - button "Open Next.js Dev Tools" [ref=f10e96] [cursor=pointer]
+  - alert [ref=f10e100]

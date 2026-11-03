@@ -4,10 +4,7 @@ export const metadata = {
 
 export default function AboutPage() {
   return (
-    <div
-      className="min-h-[calc(100vh)] bg-repeat-y"
-      style={{ backgroundImage: 'url("/paper-texture.jpg")' }}
-    >
+    <div className="min-h-[calc(100vh)] bg-white">
       <div className="px-6 md:px-12">
         <div className="max-w-[1800px] mx-auto py-16 md:py-24">
           <div className="max-w-[1400px] mb-16 md:mb-24 mx-auto">

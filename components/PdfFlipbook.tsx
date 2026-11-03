@@ -70,13 +70,13 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
         const containerWidth = entry.contentRect.width;
 
         // Each page is half the book width (two-page spread)
-        // Subtract padding for the book's internal margins
-        const padding = 40; // book padding
+        // Small padding prevents right-side cropping when window is minimized
+        const padding = 16; // book padding
         const availableWidth = containerWidth - padding;
         const pageW = Math.floor(availableWidth / 2);
         const pageH = Math.floor(pageW * 1.414); // A4 aspect ratio
         const bookW = pageW * 2 + padding;
-        const bookH = pageH + 20; // extra vertical padding for book controls and spacing
+        const bookH = pageH + 40; // extra vertical padding for book controls and spacing
 
         setBookSize({ width: bookW, height: bookH });
       }
@@ -98,7 +98,7 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
 
         for (let i = 1; i <= pdfDoc.numPages; i++) {
           const page = await pdfDoc.getPage(i);
-          const viewport = page.getViewport({ scale: 1.5 });
+          const viewport = page.getViewport({ scale: 2 });
 
           const canvas = document.createElement('canvas');
           canvas.width = viewport.width;
@@ -124,14 +124,14 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
   }, [src]);
 
   // Derive page dimensions from measured book size
-  const padding = 40;
+  const padding = 16;
   const pageWidth = Math.floor((bookSize.width - padding) / 2);
   const pageHeight = Math.floor(pageWidth * 1.414); // A4 aspect ratio
 
   return (
     <div
       ref={containerRef}
-      className="pdf-flipbook w-full min-h-0 flex flex-col items-center justify-center py-4"
+      className="pdf-flipbook w-full min-h-0 flex flex-col items-center justify-center py-2 md:py-4 overflow-hidden"
       onMouseDown={startLongPress}
       onMouseUp={clearLongPressTimer}
       onMouseLeave={clearLongPressTimer}
@@ -145,7 +145,7 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
         </p>
       )}
       <div
-        className={`bg-transparent rounded-lg overflow-hidden ${isLongPressing ? 'cursor-grabbing' : 'cursor-pointer'}`}
+        className={`bg-transparent rounded-lg ${isLongPressing ? 'cursor-grabbing' : 'cursor-pointer'}`}
         style={{ width: bookSize.width, height: bookSize.height, maxWidth: '100%' }}
         title="Hold to open full-screen"
       >
@@ -172,7 +172,7 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
             showCover={true}
             startPage={0}
             startZIndex={0}
-            flippingTime={1}
+            flippingTime={700}
             drawShadow={false}
             maxShadowOpacity={0}
             usePortrait={false}

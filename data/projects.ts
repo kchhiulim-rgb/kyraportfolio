@@ -10,10 +10,13 @@ export interface Project {
   skills: string[];
   coverImage: string;
   images: string[];
+  overlayImage?: string;
   sections?: {
     title: string;
     content: string;
     images?: string[];
+    nameTag?: string;
+    badges?: string[];
     videos?: { src: string; thumbnail?: string }[];
     videographerCredit?: string;
     pdf?: {
@@ -38,7 +41,7 @@ export const projects: Project[] = [
       "Fulcrum Coffee Roasters is a Seattle-based coffee roaster, wholesaler, and retailer focusing on sustainable farming practices and community connection.",
     role: "Visual Designer and Marketing Assistant",
     description: "Branding, Visual Design",
-    year: "2025",
+    year: "2024-2026",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -162,20 +165,54 @@ export const projects: Project[] = [
         },
       },
       {
-        title: "Newsletter for Business to Consumer Communications",
+        title: "Merchandise",
+        stacked: true,
+        padding: "pl-16 md:pl-24 pr-16 md:pr-24",
+        images: [
+          "/projects/fulcrum/merch/brian-alfred-tote-mockup.png",
+          "/projects/fulcrum/merch/tote-gif.gif",
+          "/projects/fulcrum/merch/sticker-sheet-master.png",
+          "/projects/fulcrum/merch/phone-with-3d-stickers-mockup.png",
+          "/projects/fulcrum/merch/sticker-sheet-mockup.png",
+          "/projects/fulcrum/merch/winter-roast-label.png",
+          "/projects/fulcrum/merch/holiday-blend-email.png",
+          "/projects/fulcrum/merch/valentines-day-card.gif",
+          "/projects/fulcrum/merch/packing-label.jpg",
+          "/projects/fulcrum/merch/cyber-monday.jpg",
+          "/projects/fulcrum/merch/world-cup-sticker-sheet.png",
+          "/projects/fulcrum/merch/world-cup-specials-reel.mp4",
+        ],
+        overlap: {
+          background: "/projects/fulcrum/merch/tote-mockup.png",
+          overlay: "/projects/fulcrum/merch/black-tote2.png",
+        },
+        afterOverlap: [
+          "/projects/fulcrum/merch/photoshoppped-box.jpg",
+        ],
+      },
+      {
+        title: "Newsletter for B2B and B2C Communications",
         content:
-          "To enhance communications with retail customers, I created a Welcome email flow. I planned a 3-part flow series to introduce who we are, dive into our range of coffees, highlight our subscription program, and promote our blog.",
-        images: ["/projects/fulcrum/flow1.gif", "/projects/fulcrum/flow2.gif", "/projects/fulcrum/flow3.gif"],
+          "We noticed that some of our wholesale customers had trouble navigating our newly remodeled website so I created instructional graphics to teach them to to start online orders. I also expanded on some of the services we provide, such as equipment maintenance and barista training to help customers access the resources available to them.\n\nTo enhance communications with retail customers, I created a Welcome email flow. I planned a 3-part flow series to introduce who we are, dive into our range of coffees, highlight our subscription program, and promote our blog.",
+        firstRow: "/projects/fulcrum/merch/welcome-email-mockup.png",
+        secondRow: [
+          "/projects/fulcrum/flow1.gif",
+          "/projects/fulcrum/flow2.gif",
+          "/projects/fulcrum/flow3.gif"
+        ],
       },
     ],
   },
   {
     slug: "14thseattleaaff",
-    title: "14th Annual SAAFF",
+    title: "14th Annual Seattle Asian American Film Festival",
     subtitle: "Seattle Asian American Film Festival",
+    intro:
+      "The 14th annual festival was the first with a fully staffed design team, and I was its first Art Director. The design team brainstormed a theme around interconnectedness in the Asian diaspora and the overlapping identities across Asian cultures, then built a shared moodboard around it. I built the style guide and managed the workback schedule, creative direction, and guidelines for each assignment, so seven designers could produce one consistent look.",
+    role: "Art Director\n\nTeam: Joanna Chou, Mia Van Inwegen, Lena Schiffler, Vinaayak Selvamuthu, Kerensa Suzara, Ian Teodoro, Jolin Tran",
     description:
       "Art Direction, Graphic Design, Photography",
-    year: "2024",
+    year: "2025-2026",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -189,34 +226,56 @@ export const projects: Project[] = [
     images: [],
     sections: [
       {
-        title: "",
-        content:
-          "The 14th annual festival was the first with a fully staffed design team, and I was its first Art Director. The design team brainstormed a theme around interconnectedness in the Asian diaspora and the overlapping identities across Asian cultures, then built a shared moodboard around it. I built the style guide and managed the workback schedule, creative direction, and guidelines for each assignment, so seven designers could produce one consistent look.",
-      },
-      {
-        title: "",
+        title: "Style Guide",
         content:
           "I formalized our festival theme into a full brand guide covering color, typography, and image treatment, then pitched the concept to festival leadership and led a team of 7 designers in applying it across the full range of festival touchpoints.",
+        images: [
+          "/projects/14th-saaaff/style-guide/page-1.png",
+          "/projects/14th-saaaff/style-guide/page-4.png",
+          "/projects/14th-saaaff/style-guide/page-2.png",
+          "/projects/14th-saaaff/style-guide/page-3.png",
+        ],
       },
       {
         title: "Program Book",
         content: "",
-        images: ["/projects/14th-saaaff/program/cover.png", "/projects/14th-saaaff/program/flip.gif"],
+        images: ["/projects/14th-saaaff/program/flip.gif"],
       },
       {
         title: "Merchandise",
         content: "",
-        images: ["/projects/14th-saaaff/merch/sticker-red.png", "/projects/14th-saaaff/merch/sticker-blue.png", "/projects/14th-saaaff/merch/sticker-green.png", "/projects/14th-saaaff/merch/name-tag.png", "/projects/14th-saaaff/merch/tote-red.png", "/projects/14th-saaaff/merch/tote-black.png"],
-      },
-      {
-        title: "Shirt Design",
-        content: "",
         images: ["/projects/14th-saaaff/merch/shirt.gif"],
       },
       {
-        title: "Opening Night",
+        title: "",
+        content: "",
+        nameTag: "/projects/14th-saaaff/merch/name-tag.png",
+        images: [
+          "/projects/14th-saaaff/merch/sticker-red.png",
+          "/projects/14th-saaaff/merch/sticker-blue.png",
+          "/projects/14th-saaaff/merch/sticker-green.png",
+        ],
+        badges: [
+          "/projects/14th-saaaff/merch/badges/tadashi-nakamura.png",
+          "/projects/14th-saaaff/merch/badges/ie-saaff-badge.png",
+          "/projects/14th-saaaff/merch/badges/apicat-saaff-badge.png",
+          "/projects/14th-saaaff/merch/badges/viper-fengz.png",
+        ],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/14th-saaaff/merch/tote-black.png", "/projects/14th-saaaff/merch/tote-red.png"],
+      },
+      {
+        title: "Feature on The International Examiner",
         content: "",
         images: ["/projects/14th-saaaff/ie-photo.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/14th-saaaff/ie2026.gif"],
       },
     ],
   },
@@ -224,9 +283,12 @@ export const projects: Project[] = [
     slug: "dp5",
     title: "Disposable Parts 5th Edition",
     subtitle: "Disposable Parts Magazine",
+    intro:
+      'Disposable Parts built its 5th edition around "Digital Natives," an early-2000s internet aesthetic exploring how a generation grew up online.',
+    role: "Graphic Designer",
     description:
       "Graphic Design",
-    year: "2024",
+    year: "2026",
     tools: [
       "Adobe Illustrator",
       "Adobe InDesign",
@@ -236,35 +298,44 @@ export const projects: Project[] = [
     skills: [],
     coverImage: "/projects/dp5/cover.png",
     images: [],
+    overlayImage: "/projects/dp5/digital-natives.webp",
     sections: [
-      {
-        title: "",
-        content:
-          'Disposable Parts built its 5th edition around "Digital Natives," an early-2000s internet aesthetic exploring how a generation grew up online. Every contributing designer had to work within a shared moodboard and type system so the issue held together despite having many hands on it.',
-      },
       {
         title: "",
         content:
           "Working from the set moodboard and typography system, I designed 6 spreads that each carried the early-2000s internet reference points (interface chrome, period-specific type treatments, low-fi digital textures) while staying visually consistent with the rest of the issue. Designs went through multiple rounds of editorial critique, and I revised based on that feedback rather than treating a first draft as final.",
       },
       {
-        title: "Magazine Spreads",
+        title: "Moodboard",
         content: "",
-        images: ["/projects/dp5/mockup-3.png", "/projects/dp5/mockup-4.png", "/projects/dp5/mockup-5.png"],
+        images: ["/projects/dp5/moodboard.png"],
       },
       {
-        title: "Back Cover",
+        title: "Magazine Spreads",
         content: "",
-        images: ["/projects/dp5/back-cover.jpg"],
+        images: ["/projects/dp5/mockup-3.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/dp5/mockup-4.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/dp5/mockup-5.png"],
       },
     ],
   },
   {
     slug: "seattleaaff",
-    title: "13th Annual SAAFF",
+    title: "13th Annual Seattle Asian American Film Festival",
     subtitle: "Seattle Asian American Film Festival",
+    intro:
+      "Led art direction for 13th annual film festival - playing on nostalgic themes and the hype of plushies from surprise boxes. Created all social media and print graphics.\n\nIllustrations by Felix Tran/@softvelvetboy",
+    role: "Art Director",
     description:
-      "Art Direction, Graphic Design",
+      "13th Annual Film Festival",
     year: "2023",
     tools: [
       "Adobe Illustrator",
@@ -278,19 +349,39 @@ export const projects: Project[] = [
     images: [],
     sections: [
       {
+        title: "Moodboard",
+        content: "",
+        images: ["/projects/13th-saaaff/moodboard.png"],
+      },
+      {
+        title: "Print",
+        content: "",
+        images: [
+          "/projects/13th-saaaff/print/mockup.png",
+          "/projects/13th-saaaff/print/pocket-design.gif"
+        ],
+      },
+      {
         title: "",
-        content:
-          "Led art direction for 13th annual film festival - playing on nostalgic themes and the hype of plushies from surprise boxes. Created all social media and print graphics.",
+        content: "",
+        images: ["/projects/13th-saaaff/print/on-prints.png", "/projects/13th-saaaff/print/badge-mockup.png"],
       },
       {
-        title: "Festival Graphics",
+        title: "Social",
         content: "",
-        images: ["/projects/13th-saaaff/thumbnail.gif"],
+        images: ["/projects/13th-saaaff/social/instagram-mockup.png"],
       },
       {
-        title: "Event Photos",
+        title: "",
         content: "",
-        images: ["/projects/13th-saaaff/hana.jpg", "/projects/13th-saaaff/opening-night.jpg"],
+        images: [
+          "/projects/13th-saaaff/social/save-the-date.png",
+          "/projects/13th-saaaff/social/call-for-films.jpg",
+          "/projects/13th-saaaff/social/how2fest.png",
+          "/projects/13th-saaaff/social/ticketing.png",
+          "/projects/13th-saaaff/social/virtfest.png",
+          "/projects/13th-saaaff/social/queer-af-shorts.png",
+        ],
       },
     ],
   },
@@ -298,6 +389,9 @@ export const projects: Project[] = [
     slug: "c-id-summer-cinema",
     title: "C-ID Summer Cinema",
     subtitle: "Chinatown-International District Outdoor Summer Cinema",
+    intro:
+      "In 2024, I created the poster design and social media assets for the annual Summer Cinema series presented by the Seattle Asian American Film Festival, partnered with Seattle Parks and Recreation.",
+    role: "Graphic Designer",
     description:
       "Art Direction, Graphic Design",
     year: "2024",
@@ -316,17 +410,12 @@ export const projects: Project[] = [
       {
         title: "",
         content:
-          "In 2024, I created the poster design and social media assets for the annual Summer Cinema series presented by the Seattle Asian American Film Festival, partnered with Seattle Parks and Recreation.",
-      },
-      {
-        title: "",
-        content:
           "Inspired by Hing Hay Park, a beloved gathering space in the Chinatown-International District of Seattle. I illustrated a pagoda and built the palette around retro shapes and pastel, sunset-toned colors to keep the tone warm and inviting rather than purely promotional.",
       },
       {
-        title: "Poster Mockup",
+        title: "Mood Board",
         content: "",
-        images: ["/projects/cid-cinema/mockup.png"],
+        images: ["/projects/cid-cinema/mood-board.png"],
       },
       {
         title: "",
@@ -334,8 +423,29 @@ export const projects: Project[] = [
           "The Summer Cinema series needed to draw more people to a free outdoor event in the Chinatown-International District (the C-ID), Seattle's historic Chinatown neighborhood. The design had to feel fun and welcoming enough to pull people into the neighborhood itself, with the hope that attendees would also support local Chinatown businesses while they were there.",
       },
       {
-        title: "Poster design ranked among the festival's top 5 most-engaged Instagram posts, Spring 2024 through Fall 2025.",
+        title: "",
         content: "",
+        images: ["/projects/cid-cinema/poster-watermark.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/cid-cinema/social-post.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/cid-cinema/instagram-mockup.jpg"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/cid-cinema/summer-cinema-mockup.jpg"],
+      },
+      {
+        title: "",
+        content: "Poster design ranked among the festival's top 5 most-engaged Instagram posts, Spring 2024 through Fall 2025.",
+        isStatsBox: true,
       },
     ],
   },

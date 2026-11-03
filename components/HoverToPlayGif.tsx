@@ -6,16 +6,18 @@ import { useLightbox } from "@/components/LightboxModal";
 interface HoverToPlayGifProps {
   src: string;
   alt: string;
+  autoplay?: boolean;
 }
 
-export default function HoverToPlayGif({ src, alt }: HoverToPlayGifProps) {
+export default function HoverToPlayGif({ src, alt, autoplay = false }: HoverToPlayGifProps) {
   const [hovering, setHovering] = useState(false);
   const [firstFrame, setFirstFrame] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const { openLightbox } = useLightbox();
 
-  // Extract the first frame of the GIF on mount for the initial thumbnail
+  // Extract the first frame of the GIF on mount for the initial thumbnail (skip if autoplay)
   useEffect(() => {
+    if (autoplay) return;
     const img = new Image();
     img.src = src;
     img.onload = () => {
@@ -30,20 +32,36 @@ export default function HoverToPlayGif({ src, alt }: HoverToPlayGifProps) {
         }
       }
     };
-  }, [src]);
+  }, [src, autoplay]);
 
-  const handleDoubleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     openLightbox({ src, alt, type: "gif" });
   };
+
+  // If autoplay, render the GIF directly without thumbnail logic
+  if (autoplay) {
+    return (
+      <div
+        className="relative cursor-pointer group w-full"
+        onClick={handleClick}
+      >
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-auto"
+        />
+      </div>
+    );
+  }
 
   return (
     <div
       className="relative cursor-pointer group w-full"
       onMouseEnter={() => setHovering(true)}
       onMouseLeave={() => setHovering(false)}
-      onDoubleClick={handleDoubleClick}
+      onClick={handleClick}
     >
       <canvas ref={canvasRef} className="hidden" />
       {(hovering || !firstFrame) ? (
