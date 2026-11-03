@@ -101,7 +101,27 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
     }
   };
 
-  // Drag-to-scroll handlers
+  // Track touch start to distinguish tap from swipe
+  const touchStartXRef = useRef(0);
+  const touchStartYRef = useRef(0);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartXRef.current = touch.clientX;
+    touchStartYRef.current = touch.clientY;
+  }, []);
+
+  const handleTouchEnd = useCallback((e: React.TouchEvent, index: number) => {
+    const touch = e.changedTouches[0];
+    const dx = Math.abs(touch.clientX - touchStartXRef.current);
+    const dy = Math.abs(touch.clientY - touchStartYRef.current);
+    // If movement is small, it's a tap — play/pause the video
+    if (dx < 10 && dy < 10) {
+      handleClick(index);
+    }
+  }, []);
+
+  // Drag-to-scroll handlers (desktop only)
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     const container = scrollRef.current;
     if (!container) return;
@@ -160,6 +180,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseLeaveContainer}
+        onTouchStart={handleTouchStart}
         className={`flex gap-3 md:gap-4 overflow-x-auto scrollbar-hide pb-4 snap-x snap-mandatory scroll-smooth ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none', userSelect: isDragging ? 'none' : 'auto' }}
       >
@@ -173,6 +194,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
               onMouseEnter={() => handleMouseEnter(index)}
               onMouseLeave={() => handleMouseLeave(index)}
               onClick={() => handleClick(index)}
+              onTouchEnd={(e) => handleTouchEnd(e, index)}
             >
               <video
                 ref={(el) => { videoRefs.current[index] = el; }}
