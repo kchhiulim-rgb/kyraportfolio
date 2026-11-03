@@ -294,6 +294,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
           </div>
         ))}
       </div>
+      </div>
       {/* Popup modal for mobile video expand */}
       {popupIndex !== null && (
         <div
