@@ -1,7 +1,7 @@
 {
-  "mcpServers": {
-    "Vercel": {
-      "url": "https://mcp.vercel.com"
+    "mcpServers": {
+        "Vercel": {
+            "url": "https://mcp.vercel.com"
+        }
     }
-  }
 }

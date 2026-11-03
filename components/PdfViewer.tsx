@@ -2,14 +2,15 @@
 
 import { PDFViewer } from '@embedpdf/viewer-react';
 import { chromeHelpers } from '@embedpdf/viewer';
+import type { ViewerHandle } from '@embedpdf/viewer';
 
 interface PdfViewerProps {
   src: string;
   title?: string;
 }
 
-// Remove all editing commands, keeping only viewing tools (zoom, scroll, rotate, document ops)
-const editingCommands = [
+// Hide view-redact and related controls
+const removeCommands = [
   'mode:annotate',
   'mode:shapes',
   'mode:insert',
@@ -32,15 +33,21 @@ export default function PdfViewer({ src, title }: PdfViewerProps) {
   return (
     <div className="pdf-viewer my-6">
       {title && (
-        <p className="font-space-grotesk text-sm text-gray-600 mb-2">
+        <p className="font-body text-sm text-gray-600 mb-2">
           <span className="font-semibold text-gray-800">{title}</span>
         </p>
       )}
       <div className="bg-white rounded-lg shadow-lg overflow-hidden" style={{ height: '800px' }}>
         <PDFViewer
           src={src}
-          disabledCategories={['annotation', 'mode']}
-          chrome={(base) => chromeHelpers.removeItems(base, editingCommands)}
+          chrome={(base, helpers) => {
+            const without = helpers.removeItems(base, removeCommands);
+            return { ...without, frame: { ...without.frame, tabs: 'never' } };
+          }}
+          onReady={(viewer: ViewerHandle) => {
+            // Use built-in commands to set two-page spread and paged flow
+            viewer.execute('spread:odd');
+          }}
         />
       </div>
     </div>

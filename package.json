@@ -11,8 +11,11 @@
   "dependencies": {
     "@embedpdf/viewer-react": "^3.0.0-next.0",
     "next": "16.4.3",
+    "playwright": "^1.64.1",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "react-pageflip": "^2.0.3",
+    "react-pdf": "^11.0.0"
   },
   "devDependencies": {
     "@tailwindcss/turbopack": "^4",

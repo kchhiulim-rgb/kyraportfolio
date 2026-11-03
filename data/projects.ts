@@ -2,7 +2,10 @@ export interface Project {
   slug: string;
   title: string;
   subtitle?: string;
-  description: string;
+  intro?: string;
+  role?: string;
+  description?: string;
+  year?: string;
   tools: string[];
   skills: string[];
   coverImage: string;
@@ -11,10 +14,18 @@ export interface Project {
     title: string;
     content: string;
     images?: string[];
+    videos?: { src: string; thumbnail?: string }[];
+    videographerCredit?: string;
     pdf?: {
       src: string;
       title?: string;
+      disclaimer?: string;
     };
+    columns?: {
+      header: string;
+      images: string[];
+    }[];
+    isCompactText?: boolean;
   }[];
 }
 
@@ -23,13 +34,16 @@ export const projects: Project[] = [
     slug: "fulcrumroasters",
     title: "Fulcrum Brand Identity System",
     subtitle: "Fulcrum Coffee Roasters",
-    description:
-      "Branding, Visual Design",
+    intro:
+      "Fulcrum Coffee Roasters is a Seattle-based coffee roaster, wholesaler, and retailer focusing on sustainable farming practices and community connection.",
+    role: "Visual Designer and Marketing Assistant",
+    description: "Branding, Visual Design",
+    year: "2025",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
       "Adobe Lightroom Classic",
-      "Klaviyo",
+      "Klavyio",
       "Branding",
       "Photography",
       "Video editing",
@@ -37,105 +51,121 @@ export const projects: Project[] = [
       "Graphic design",
     ],
     skills: [],
-    coverImage: "/projects/fulcrum/cover.png",
+    coverImage: "/ezgif-optimized.gif",
     images: [],
     sections: [
       {
+        title: "",
+        content: "",
+        images: ["/projects/fulcrum/email/mockup.png"],
+      },
+      {
         title: "Problem:",
         content:
-          '"Fulcrum Coffee Roasters is the parent brand over three distinct product lines: Silver Cup, Urban City, and Fulcrum Coffee (Origin). But the parent brand had little presence of its own. Media presence and materials leaned on the product brands, particularly Fulcrum Coffee (Origin), instead of the parent identity."',
+          'Fulcrum Coffee Roasters is the parent brand over three distinct product lines: Silver Cup, Urban City, and Fulcrum Coffee (Origin). But the parent brand had little presence of its own. Media presence and materials leaned on the product brands, particularly Fulcrum Coffee (Origin), instead of the parent identity.',
+        images: ["/projects/fulcrum/brand-guide.png", "/projects/fulcrum/old-instagram-feed.png"],
       },
       {
         title: "Solution:",
         content:
           'I led a full brand refresh for Fulcrum Coffee Roasters, building a distinct parent-brand identity (the "F" monogram system, typography, and color palette) applied consistently across Instagram, email, signage, apparel, and packaging. I designed the Instagram highlights architecture (Seasonal, Fulcrum Café, Our Brands, Learn More) so the parent brand anchored the account while each product brand kept its own distinct presence within that system.',
+        images: ["/projects/fulcrum/fcr-brand-guide.png", "/projects/fulcrum/new-instagram-feed.png"],
       },
       {
-        title: "Brand Guide",
-        content: "",
-        pdf: {
-          src: "/projects/fulcrum/brand-guide.pdf",
-          title: "Updated Brand Guide",
-        },
+        title: "Social Media",
+        content:
+          "Fulcrum's Instagram page had high quality photos but lacked a consistent brand identity for its audience to resonate with. With the Marketing Director, I brainstormed ways to make more valuable and engaging content that educates our audience about our company. The posts had low engagement although the account was active and posted frequently. I redesigned our highlights and incorporated more graphic design/text based work to capture viewers' attention. We grew our Instagram following by 2.8k followers in 18 months and maintained above average engagement rates (49% compared to other food industry accounts at 6.4%).",
+        images: [],
       },
       {
-        title: "Instagram Feed",
+        title: "",
         content: "",
-        images: ["/projects/fulcrum/instagram-feed.png"],
+        columns: [
+          {
+            header: "SEASONAL",
+            images: ["/projects/fulcrum/drinks-blue.png"],
+          },
+          {
+            header: "OUR BRANDS",
+            images: ["/projects/fulcrum/brands-2.png"],
+          },
+          {
+            header: "LEARN MORE",
+            images: ["/projects/fulcrum/learn-more.png"],
+          },
+        ],
       },
       {
-        title: "SEASONAL",
+        title: "",
         content: "",
-        images: ["/projects/fulcrum/highlights/seasonal.png"],
-      },
-      {
-        title: "OUR BRANDS",
-        content: "",
-        images: ["/projects/fulcrum/highlights/brands.png"],
-      },
-      {
-        title: "FULCRUM CAFÉ",
-        content: "",
-        images: ["/projects/fulcrum/highlights/cafe.png"],
-      },
-      {
-        title: "LEARN MORE",
-        content: "",
-        images: ["/projects/fulcrum/highlights/learnmore.png"],
+        images: ["/projects/fulcrum/fallmenu.gif", "/projects/fulcrum/brands.gif", "/projects/fulcrum/learn-more.gif"],
       },
       {
         title: "Single Origin Coffee Educational Series",
         content: "",
+        images: [],
+        videos: [
+          { src: "/videos/fulcrum/Colombia Reel V1.mp4", thumbnail: "/videos/fulcrum/Colombia Reel Thumbnail.png" },
+          { src: "/videos/fulcrum/El Salvador Reel Final.mp4", thumbnail: "/videos/fulcrum/El Salvador Thumbnail.png" },
+          { src: "/videos/fulcrum/Reel 5 - Sustaining Community.mp4", thumbnail: "/videos/fulcrum/Sustaining Community Thumbnail.png" },
+          { src: "/videos/fulcrum/HeritageReel4_Final.mp4", thumbnail: "/videos/fulcrum/Heritage Thumbnail.png" },
+          { src: "/videos/fulcrum/francisca-reel-2-v2.mp4", thumbnail: "/videos/fulcrum/Francisca Reel Thumbnail.png" },
+        ],
+        videographerCredit: "Videographer: Dan Taylor",
       },
       {
         title: "",
         content:
-          "Supporting the rollout, I jumpstarted the creation of two original Instagram Reels series spotlighting wholesale café partners across WA and profiling single-origin coffee farmers, extending the new brand voice into video. I wrote and produced scripts from live subject interviews and led the visual storytelling through the final edit.",
+          "Supporting the rollout, I jumpstarted the creation of two original Instagram Reels series spotlighting wholesale café partners across WA and profiling single-origin coffee farmers, extending the new brand voice into video. I recorded, edited, wrote, and produced scripts from live subject interviews and led the visual storytelling.",
+        images: [],
       },
       {
         title: "Small Business Highlight Reels",
         content: "",
+        images: [],
+        videos: [
+          { src: "/videos/fulcrum/FrenchGuysReelCC.mp4", thumbnail: "/videos/fulcrum/French Guys Thumbnail.jpg" },
+          { src: "/videos/fulcrum/70 and Sunny Reel.mp4", thumbnail: "/videos/fulcrum/70 and Sunny Thumbnail.JPG" },
+          { src: "/videos/fulcrum/Coffee Tab Reel RESYNCED White Subtitles.mp4", thumbnail: "/videos/fulcrum/Coffee Tab Thumbnail New.jpg" },
+          { src: "/videos/fulcrum/Friend Museum Reel Synced.mp4", thumbnail: "/videos/fulcrum/Friend Museum Thumbnail.jpg" },
+          { src: "/videos/fulcrum/Bonito Reel Final Synced.mp4", thumbnail: "/videos/fulcrum/Bonito Thumbnail.JPEG" },
+          { src: "/videos/fulcrum/Indi Chocolate Reel.mp4", thumbnail: "/videos/fulcrum/Indi Chocolate Thumbnail.jpg" },
+        ],
       },
       {
         title: "Barista Training Manual Redesign",
-        content:
-          "The branding in the previous version of the Barista Handbook leaned on the visual identity of one the product brands, 'Fulcrum Coffee,' whereas the updated book better reflects the branding of the parent brand 'Fulcrum Coffee Roasters.' While Fulcrum Coffee's branding has a more geometric design style with blue tones, Fulcrum Coffee Roasters has a brown & gray color palette with minimalistic & modern design elements.",
-        images: ["/projects/fulcrum/barista/cover-design.png", "/projects/fulcrum/barista/mockup.png"],
+        content: "",
+        images: ["/projects/fulcrum/barista-thumbnail.png"],
       },
       {
         title: "",
         content:
-          "The layout of the book spreads were improved to support the ease of use for baristas. Text and relevant graphic elements were display on the same spreads to make it easier to follow along. In the previous version of the handbook, diagrams and text were separated, requiring the user to flip back-and-forth to connect information. Making sure those elements are seen together helps the reader navigate and understand ideas better throughout the book; some examples are the machine and dose diagrams, and the drink glossary.",
-        images: ["/projects/fulcrum/barista/page-toc.jpg", "/projects/fulcrum/barista/page-tamping.jpg", "/projects/fulcrum/barista/page-extraction.jpg"],
+          "The branding in the previous version of the Barista Handbook leaned on the visual identity of one the product brands, 'Fulcrum Coffee,' whereas the updated book better reflects the branding of the parent brand 'Fulcrum Coffee Roasters.' While Fulcrum Coffee's branding has a more geometric design style with blue tones, Fulcrum Coffee Roasters has a brown & gray color palette with minimalistic & modern design elements.\n\nThe layout of the book spreads were improved to support the ease of use for baristas. Text and relevant graphic elements were display on the same spreads to make it easier to follow along. In the previous version of the handbook, diagrams and text were separated, requiring the user to flip back-and-forth to connect information. Making sure those elements are seen together helps the reader navigate and understand ideas better throughout the book; some examples are the machine and dose diagrams, and the drink glossary.",
+        images: [],
+        isCompactText: true,
       },
       {
-        title: "Full Manual",
+        title: "",
         content: "",
         pdf: {
-          src: "/projects/fulcrum/barista-fundamentals.pdf",
-          title: "Barista Fundamentals Manual",
+          src: "/barista-old.pdf",
+          title: "Old Version Barista Fundamentals",
+        },
+      },
+      {
+        title: "",
+        content: "",
+        pdf: {
+          src: "/barista-new.pdf",
+          title: "Barista Fundamentals 2026 Redesign",
+          disclaimer: "*Select blank pages omitted, page numbers do not accurately reflect print ready version",
         },
       },
       {
         title: "Newsletter for Business to Consumer Communications",
         content:
           "To enhance communications with retail customers, I created a Welcome email flow. I planned a 3-part flow series to introduce who we are, dive into our range of coffees, highlight our subscription program, and promote our blog.",
-        images: ["/projects/fulcrum/email/mockup.png"],
-      },
-      {
-        title: "Email Templates",
-        content: "",
-        images: ["/projects/fulcrum/email/welcome.jpg", "/projects/fulcrum/email/subscription.jpg", "/projects/fulcrum/email/top-brews.jpg"],
-      },
-      {
-        title: "Product Photography",
-        content: "",
-        images: ["/projects/fulcrum/photoshoot/01.jpg", "/projects/fulcrum/photoshoot/02.jpg", "/projects/fulcrum/photoshoot/03.jpg", "/projects/fulcrum/photoshoot/04.jpg", "/projects/fulcrum/photoshoot/05.jpg", "/projects/fulcrum/photoshoot/06.jpg"],
-      },
-      {
-        title: "Merchandise & Packaging",
-        content: "",
-        images: ["/projects/fulcrum/merch/tote.png", "/projects/fulcrum/merch/postcard-01.png", "/projects/fulcrum/merch/postcard-04.png", "/projects/fulcrum/merch/holiday-card.png"],
+        images: ["/projects/fulcrum/flow1.gif", "/projects/fulcrum/flow2.gif", "/projects/fulcrum/flow3.gif"],
       },
     ],
   },
@@ -145,6 +175,7 @@ export const projects: Project[] = [
     subtitle: "Seattle Asian American Film Festival",
     description:
       "Art Direction, Graphic Design, Photography",
+    year: "2024",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -154,7 +185,7 @@ export const projects: Project[] = [
       "Print",
     ],
     skills: [],
-    coverImage: "/projects/14th-saaaff/cover.png",
+    coverImage: "/saaff2026.gif",
     images: [],
     sections: [
       {
@@ -195,6 +226,7 @@ export const projects: Project[] = [
     subtitle: "Disposable Parts Magazine",
     description:
       "Graphic Design",
+    year: "2024",
     tools: [
       "Adobe Illustrator",
       "Adobe InDesign",
@@ -233,6 +265,7 @@ export const projects: Project[] = [
     subtitle: "Seattle Asian American Film Festival",
     description:
       "Art Direction, Graphic Design",
+    year: "2023",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -241,7 +274,7 @@ export const projects: Project[] = [
       "Print",
     ],
     skills: [],
-    coverImage: "/projects/13th-saaaff/cover.png",
+    coverImage: "/saff-2025-popcorn.gif",
     images: [],
     sections: [
       {
@@ -267,6 +300,7 @@ export const projects: Project[] = [
     subtitle: "Chinatown-International District Outdoor Summer Cinema",
     description:
       "Art Direction, Graphic Design",
+    year: "2024",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",

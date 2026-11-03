@@ -1,20 +1,8 @@
 import type { Metadata } from "next";
-import { Raleway, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-
-const raleway = Raleway({
-  variable: "--font-raleway",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { LightboxProvider } from "@/components/LightboxModal";
 
 export const metadata: Metadata = {
   title: "Kyra Chhiu-Lim | Visual Designer",
@@ -23,14 +11,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${raleway.variable} ${spaceGrotesk.variable}`}
-    >
-      <body className="min-h-screen flex flex-col bg-[#f5f0eb]">
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+    <html lang="en">
+      <body className="min-h-screen flex flex-col">
+        <LightboxProvider>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </LightboxProvider>
       </body>
     </html>
   );
