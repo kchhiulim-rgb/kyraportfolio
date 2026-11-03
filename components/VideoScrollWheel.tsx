@@ -221,10 +221,10 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                 loop
                 className="w-full h-full object-cover"
               />
-              {/* Thumbnail overlay */}
+              {/* Thumbnail overlay — hidden on mobile, hover-hidden on desktop */}
               {videoItem.thumbnail && !tappedVideos.has(index) && (
                 <div
-                  className="absolute inset-0 overflow-hidden pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity"
+                  className="absolute inset-0 overflow-hidden pointer-events-none opacity-0 md:opacity-100 md:group-hover:opacity-0 transition-opacity"
                 >
                   <img
                     src={videoItem.thumbnail}
@@ -233,10 +233,10 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                   />
                 </div>
               )}
-              {/* Play overlay */}
+              {/* Play overlay — hidden on mobile, hover-hidden on desktop */}
               {videoItem.thumbnail && !tappedVideos.has(index) && (
                 <div
-                  className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-100 group-hover:opacity-0 transition-opacity"
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 md:opacity-100 md:group-hover:opacity-0 transition-opacity"
                 >
                   <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                     <svg
@@ -249,10 +249,10 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                   </div>
                 </div>
               )}
-              {/* Volume toggle button */}
+              {/* Volume toggle button — always visible on mobile, hover on desktop */}
               <button
                 onClick={(e) => { e.stopPropagation(); onToggleMute?.(); }}
-                className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-0 group-hover:opacity-100 transition-opacity"
+                className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center pointer-events-auto opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity"
               >
                 {muted ? (
                   <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24">
