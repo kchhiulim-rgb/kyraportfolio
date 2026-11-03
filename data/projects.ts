@@ -364,10 +364,12 @@ export const projects: Project[] = [
       {
         title: "Print",
         content: "",
-        images: [
-          "/projects/13th-saaaff/print/mockup.png",
-          "/projects/13th-saaaff/print/pocket-design.gif"
-        ],
+        images: ["/projects/13th-saaaff/print/mockup.png"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/13th-saaaff/print/pocket-design.gif"],
       },
       {
         title: "",
