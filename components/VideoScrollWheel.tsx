@@ -215,7 +215,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
         {videos.map((videoItem, index) => (
           <div
             key={index}
-            className="flex-shrink-0 snap-start w-[240px] md:w-[960px]"
+            className="flex-shrink-0 snap-start w-[240px] md:w-[480px]"
           >
             <div
               className="relative rounded-xl overflow-hidden bg-black aspect-[9/16] cursor-pointer group"
@@ -323,7 +323,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
               playsInline
               loop
               autoPlay
-              className="max-w-full max-h-full object-contain"
+              className="max-w-full max-h-[90vh] object-contain"
             />
           </div>
         </div>
