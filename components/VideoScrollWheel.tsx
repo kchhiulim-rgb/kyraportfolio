@@ -19,6 +19,9 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   // Track which videos have been tapped (to hide thumbnail/play overlay on mobile)
   const [tappedVideos, setTappedVideos] = useState<Set<number>>(new Set());
+  // Popup modal state for mobile video expand
+  const [popupIndex, setPopupIndex] = useState<number | null>(null);
+  const popupVideoRef = useRef<HTMLVideoElement | null>(null);
 
   // Drag-to-scroll state
   const [isDragging, setIsDragging] = useState(false);
@@ -117,26 +120,25 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
     const touch = e.changedTouches[0];
     const dx = Math.abs(touch.clientX - touchStartXRef.current);
     const dy = Math.abs(touch.clientY - touchStartYRef.current);
-    // If movement is small, it's a tap — play/pause the video
+    // If movement is small, it's a tap — open popup on mobile
     if (dx < 10 && dy < 10) {
-      const video = videoRefs.current[index];
-      if (video) {
-        // Ensure muted for mobile autoplay policy
-        video.muted = true;
-        if (video.paused) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-        }
-        // Mark as tapped to hide overlays
-        setTappedVideos((prev) => {
-          const next = new Set(prev);
-          next.add(index);
-          return next;
-        });
-      }
+      // Mark as tapped to hide overlays
+      setTappedVideos((prev) => {
+        const next = new Set(prev);
+        next.add(index);
+        return next;
+      });
+      // Open the popup modal on mobile
+      setPopupIndex(index);
     }
   }, []);
+
+  // When popup closes, pause the popup video
+  useEffect(() => {
+    if (popupIndex !== null && popupVideoRef.current) {
+      popupVideoRef.current.play().catch(() => {});
+    }
+  }, [popupIndex]);
 
   // Drag-to-scroll handlers (desktop only)
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
@@ -164,9 +166,18 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
     setIsDragging(false);
   }, []);
 
+  // Close popup and pause video
+  const closePopup = useCallback(() => {
+    if (popupVideoRef.current) {
+      popupVideoRef.current.pause();
+    }
+    setPopupIndex(null);
+  }, []);
+
   return (
-    <div className="relative">
-      {/* Left arrow indicator */}
+    <>
+      <div className="relative">
+        {/* Left arrow indicator */}
       {showLeftArrow && (
         <button
           onClick={() => scrollDirection('left')}
@@ -273,6 +284,39 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
           </div>
         ))}
       </div>
-    </div>
+      {/* Popup modal for mobile video expand */}
+      {popupIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 bg-black flex items-center justify-center"
+          onClick={closePopup}
+        >
+          {/* Close button */}
+          <button
+            onClick={closePopup}
+            className="absolute top-4 right-4 z-50 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center"
+            aria-label="Close video"
+          >
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          {/* Video container */}
+          <div
+            className="relative w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <video
+              ref={(el) => { popupVideoRef.current = el; }}
+              src={videos[popupIndex]?.src}
+              muted={muted}
+              playsInline
+              loop
+              autoPlay
+              className="max-w-full max-h-full object-contain"
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
