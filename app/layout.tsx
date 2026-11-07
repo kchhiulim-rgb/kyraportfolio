@@ -5,18 +5,19 @@ import Footer from "@/components/Footer";
 import { LightboxProvider } from "@/components/LightboxModal";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.kyrachhiu-lim.com"),
   title: "Kyra Chhiu-Lim | Visual Designer",
   description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
   icons: {
-    icon: "/favicon.png",
-    apple: "/favicon.png",
+    icon: "/favicon.png?v=2",
+    apple: "/favicon.png?v=2",
   },
   openGraph: {
     title: "Kyra Chhiu-Lim | Visual Designer",
     description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image.png?v=2",
         width: 1200,
         height: 630,
         alt: "Kyra Chhiu-Lim Visual Designer Portfolio",
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kyra Chhiu-Lim | Visual Designer",
     description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
-    images: ["/og-image.png"],
+    images: ["/og-image.png?v=2"],
   },
 };
 
