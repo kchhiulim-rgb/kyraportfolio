@@ -46,6 +46,7 @@ interface Section {
   }[];
   isCompactText?: boolean;
   stacked?: boolean;
+  gallery?: boolean;
   padding?: string;
   overlap?: { background: string; overlay: string };
   afterOverlap?: string[];
@@ -64,6 +65,9 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
   // Popup modal for video expand
   const [popupVideo, setPopupVideo] = useState<string | null>(null);
   const popupVideoRef = useRef<HTMLVideoElement | null>(null);
+  // Floating back-to-TOC button
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const tocRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (popupVideo !== null && popupVideoRef.current) {
@@ -78,8 +82,110 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
     setPopupVideo(null);
   }, []);
 
+  // Show/hide back-to-TOC button based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      if (tocRef.current) {
+        const rect = tocRef.current.getBoundingClientRect();
+        setShowBackToTop(rect.bottom < 0);
+      }
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToToc = () => {
+    if (tocRef.current) {
+      tocRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Collect section titles for the table of contents
+  // Merge "Problem:" and "Solution:" into a single "THE BRAND" entry
+  // Nest "Single Origin Coffee Educational Series" and "Small Business Highlight Reels" under "Social Media"
+  const tocItems: { title: string; index: number; children?: { title: string; index: number }[] }[] = sections
+    .map((section, idx) => {
+      let title = section.title;
+      if (title === 'Problem:' || title === 'Solution:') {
+        return { title: 'THE BRAND', index: idx, isBrand: true };
+      }
+      return { title, index: idx, isBrand: false };
+    })
+    .filter((item) => item.title && item.title.trim() !== '')
+    .reduce((acc: { title: string; index: number; children?: { title: string; index: number }[]; isBrand?: boolean }[], item) => {
+      if (item.isBrand) {
+        // Keep only the first "THE BRAND" entry
+        if (!acc.some((i) => i.title === 'THE BRAND')) {
+          acc.push({ title: item.title, index: item.index });
+        }
+        return acc;
+      }
+      // Check if the previous item is "Social Media" and current item is a sub-item
+      const lastItem = acc[acc.length - 1];
+      if (lastItem && lastItem.title === 'Social Media' && (item.title === 'Single Origin Coffee Educational Series' || item.title === 'Small Business Highlight Reels' || item.title === 'Instagram Story Highlights')) {
+        if (!lastItem.children) lastItem.children = [];
+        lastItem.children.push({ title: item.title, index: item.index });
+        return acc;
+      }
+      acc.push({ title: item.title, index: item.index });
+      return acc;
+    }, []);
+
   return (
     <>
+      {/* Table of Contents */}
+      {tocItems.length > 0 && (
+        <div ref={tocRef} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
+          <h3 className="font-heading font-bold text-xl md:text-2xl mb-4" style={{ fontWeight: 700 }}>
+            Table of Contents
+          </h3>
+          <div className="space-y-0">
+            {tocItems.map((item, idx) => (
+              <div key={item.index} className="py-3 border-b border-black last:border-b-0">
+                <a
+                  href={`#section-${item.index}`}
+                  className="font-body text-lg uppercase text-gray-800 hover:text-gray-900 transition-colors cursor-pointer"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    const el = document.getElementById(`section-${item.index}`);
+                    if (el) el.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  ↓&ensp;{item.title}
+                </a>
+                {item.children && item.children.map((child) => (
+                  <div key={child.index} className="py-2 border-b border-black last:border-b-0 ml-4">
+                    <a
+                      href={`#section-${child.index}`}
+                      className="font-body text-base uppercase text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById(`section-${child.index}`);
+                        if (el) el.scrollIntoView({ behavior: 'smooth' });
+                      }}
+                    >
+                      {child.title}
+                    </a>
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      {/* Floating Back to TOC Button */}
+      {showBackToTop && (
+        <button
+          onClick={scrollToToc}
+          className="fixed top-6 right-6 z-50 flex items-center justify-center w-12 h-12 bg-white/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-white transition-all duration-200 cursor-pointer"
+          aria-label="Back to Table of Contents"
+        >
+          <svg className="w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+          </svg>
+        </button>
+      )}
       {sections.map((section, i) => {
         const nextSection = sections[i + 1];
         const isProblemSolutionPair =
@@ -90,7 +196,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
             <div key={i} className="space-y-8 mb-12 md:mb-16">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className={isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}>
-                  <h3 className="font-heading text-lg md:text-xl mb-4" style={{ fontWeight: 900 }}>
+                  <h3 id={`section-${i}`} className="font-heading text-lg md:text-xl mb-4" style={{ fontWeight: 900 }}>
                     {section.title}
                   </h3>
                   <div className="space-y-4">
@@ -105,7 +211,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                   </div>
                 </div>
                 <div className={isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}>
-                  <h3 className="font-heading text-lg md:text-xl mb-4" style={{ fontWeight: 900 }}>
+                  <h3 id={`section-${i + 1}`} className="font-heading text-lg md:text-xl mb-4" style={{ fontWeight: 900 }}>
                     {nextSection.title}
                   </h3>
                   <div className="space-y-4">
@@ -214,7 +320,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
           return (
             <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
               {section.title && (
-                <h3 className="font-heading font-bold text-lg md:text-xl mb-4">
+                <h3 id={`section-${i}`} className="font-heading font-bold text-lg md:text-xl mb-4">
                   {section.title}
                 </h3>
               )}
@@ -259,7 +365,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                           <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
                         </div>
                       ) : img.endsWith('.gif') ? (
-                        <HoverToPlayGif src={img} alt={`Project image ${j + 1}`} autoplay={img.includes('tote-gif') || img.includes('valentines-day-card')} />
+                        <HoverToPlayGif src={img} alt={`Project image ${j + 1}`} autoplay={img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif')} />
                       ) : isFullResImage ? (
                         <ClickableImage src={img} alt={`Project image ${j + 1}`}>
                           <img
@@ -289,10 +395,93 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
           );
         }
 
+        // Gallery layout: masonry/tetris style where images pack together
+        if (section.gallery && section.images && section.images.length > 0) {
+          return (
+            <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
+              {section.title && (
+                <h3
+                  id={`section-${i}`}
+                  className="font-heading font-bold text-xl md:text-2xl mb-6 pl-12 pr-12"
+                  style={{ fontWeight: 700 }}
+                >
+                  {section.title}
+                </h3>
+              )}
+              <div className="columns-2 md:columns-3 lg:columns-4 gap-4 px-12 space-y-4">
+                {section.images.map((img, j) => {
+                  // Skip black-tote2.png here — it's rendered with tote-mockup.png below
+                  if (img.includes('black-tote2')) return null;
+                  if (img.endsWith('.mp4')) {
+                    const isAutoplay = img.includes('world-cup');
+                    return (
+                      <div
+                        key={j}
+                        className="break-inside-avoid overflow-hidden cursor-pointer"
+                        onClick={() => setPopupVideo(img)}
+                      >
+                        {isAutoplay ? (
+                          <AutoplayVideo src={img} className="w-full" />
+                        ) : (
+                          <video src={img} className="w-full" muted autoPlay loop playsInline />
+                        )}
+                      </div>
+                    );
+                  }
+                  if (img.endsWith('.gif')) {
+                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif');
+                    return (
+                      <div key={j} className="break-inside-avoid overflow-hidden">
+                        <HoverToPlayGif src={img} alt={`${section.title || 'Project image'} ${j + 1}`} autoplay={isAutoplay} />
+                      </div>
+                    );
+                  }
+                  // If this is tote-mockup.png (not brian-alfred-tote-mockup), render it with black-tote2.png overlapping top-left
+                  if (img === '/projects/fulcrum/merch/tote-mockup.png') {
+                    return (
+                      <div key={j} className="break-inside-avoid relative overflow-hidden">
+                        <ClickableImage src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
+                          <img
+                            src={img}
+                            alt={`${section.title || 'Project image'} ${j + 1}`}
+                            className="w-full h-auto"
+                            loading="lazy"
+                          />
+                        </ClickableImage>
+                        <ClickableImage src="/projects/fulcrum/merch/black-tote2.png" alt="Merchandise/Print Design 14">
+                          <img
+                            src="/projects/fulcrum/merch/black-tote2.png"
+                            alt="Merchandise/Print Design 14"
+                            className="absolute top-0 left-0 w-1/3 h-auto"
+                            loading="lazy"
+                          />
+                        </ClickableImage>
+                      </div>
+                    );
+                  }
+                  return (
+                    <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
+                      <div className="break-inside-avoid overflow-hidden">
+                        <img
+                          src={img}
+                          alt={`${section.title || 'Project image'} ${j + 1}`}
+                          className="w-full h-auto"
+                          loading="lazy"
+                        />
+                      </div>
+                    </ClickableImage>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        }
+
         return (
           <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
             {section.title && (
               <h3
+                id={`section-${i}`}
                 className={`font-heading font-bold text-xl md:text-2xl mb-4 ${section.content || (section.images && section.images.length > 0) ? 'pl-12' : 'pl-12'}`}
                 style={{ fontWeight: 700 }}
               >
@@ -381,7 +570,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                     );
                   }
                   if (img.endsWith('.gif')) {
-                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card');
+                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif');
                     return <HoverToPlayGif key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`} autoplay={isAutoplay} />;
                   }
                   const isFullResImage = img.includes('barista-thumbnail') || img.includes('email/mockup');

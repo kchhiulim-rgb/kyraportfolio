@@ -30,6 +30,7 @@ export interface Project {
     }[];
     isCompactText?: boolean;
     stacked?: boolean;
+    gallery?: boolean;
     padding?: string;
     overlap?: { background: string; overlay: string };
     afterOverlap?: string[];
@@ -67,7 +68,7 @@ export const projects: Project[] = [
       {
         title: "",
         content: "",
-        images: ["/projects/fulcrum/email/mockup.png"],
+        images: ["/ezgif-optimized.gif"],
       },
       {
         title: "Problem:",
@@ -88,7 +89,7 @@ export const projects: Project[] = [
         images: [],
       },
       {
-        title: "",
+        title: "Instagram Story Highlights",
         content: "",
         columns: [
           {
@@ -172,10 +173,9 @@ export const projects: Project[] = [
         },
       },
       {
-        title: "Merchandise",
+        title: "Merchandise/Print Design",
         content: "",
-        stacked: true,
-        padding: "pl-16 md:pl-24 pr-16 md:pr-24",
+        gallery: true,
         images: [
           "/projects/fulcrum/merch/brian-alfred-tote-mockup.png",
           "/projects/fulcrum/merch/tote-gif.gif",
@@ -184,17 +184,12 @@ export const projects: Project[] = [
           "/projects/fulcrum/merch/sticker-sheet-mockup.png",
           "/projects/fulcrum/merch/winter-roast-label.png",
           "/projects/fulcrum/merch/holiday-blend-email.png",
-          "/projects/fulcrum/merch/valentines-day-card.gif",
           "/projects/fulcrum/merch/packing-label.jpg",
           "/projects/fulcrum/merch/cyber-monday.jpg",
           "/projects/fulcrum/merch/world-cup-sticker-sheet.png",
           "/projects/fulcrum/merch/world-cup-specials-reel.mp4",
-        ],
-        overlap: {
-          background: "/projects/fulcrum/merch/tote-mockup.png",
-          overlay: "/projects/fulcrum/merch/black-tote2.png",
-        },
-        afterOverlap: [
+          "/projects/fulcrum/merch/tote-mockup.png",
+          "/projects/fulcrum/merch/black-tote2.png",
           "/projects/fulcrum/merch/photoshoppped-box.jpg",
         ],
       },
@@ -338,13 +333,13 @@ export const projects: Project[] = [
   {
     slug: "seattleaaff",
     title: "13th Annual Seattle Asian American Film Festival",
-    subtitle: "Seattle Asian American Film Festival",
+    subtitle: "13th Annual Seattle Asian American Film Festival",
     intro:
       "Led art direction for 13th annual film festival - playing on nostalgic themes and the hype of plushies from surprise boxes. Created all social media and print graphics.\n\nIllustrations by Felix Tran/@softvelvetboy",
-    role: "Art Director",
+    role: "In-house Designer",
     description:
-      "13th Annual Film Festival",
-    year: "2025",
+      "ART DIRECTION, GRAPHIC DESIGN",
+    year: "2024-2025",
     tools: [
       "Adobe Illustrator",
       "Adobe Photoshop",
@@ -401,7 +396,7 @@ export const projects: Project[] = [
     subtitle: "Chinatown-International District Outdoor Summer Cinema",
     intro:
       "In 2024, I created the poster design and social media assets for the annual Summer Cinema series presented by the Seattle Asian American Film Festival, partnered with Seattle Parks and Recreation.",
-    role: "Graphic Designer",
+    role: "In-house Designer",
     description:
       "Art Direction, Graphic Design",
     year: "2024",

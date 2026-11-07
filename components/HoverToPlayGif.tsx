@@ -7,9 +7,10 @@ interface HoverToPlayGifProps {
   src: string;
   alt: string;
   autoplay?: boolean;
+  fill?: boolean;
 }
 
-export default function HoverToPlayGif({ src, alt, autoplay = false }: HoverToPlayGifProps) {
+export default function HoverToPlayGif({ src, alt, autoplay = false, fill = false }: HoverToPlayGifProps) {
   const [hovering, setHovering] = useState(false);
   const [firstFrame, setFirstFrame] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -40,6 +41,8 @@ export default function HoverToPlayGif({ src, alt, autoplay = false }: HoverToPl
     openLightbox({ src, alt, type: "gif" });
   };
 
+  const imgClass = fill ? 'w-full h-full object-cover' : 'w-full h-auto';
+
   // If autoplay, render the GIF directly without thumbnail logic
   if (autoplay) {
     return (
@@ -50,7 +53,7 @@ export default function HoverToPlayGif({ src, alt, autoplay = false }: HoverToPl
         <img
           src={src}
           alt={alt}
-          className="w-full h-auto"
+          className={imgClass}
         />
       </div>
     );
@@ -68,13 +71,13 @@ export default function HoverToPlayGif({ src, alt, autoplay = false }: HoverToPl
         <img
           src={src}
           alt={alt}
-          className="w-full h-auto"
+          className={imgClass}
         />
       ) : firstFrame ? (
         <img
           src={firstFrame}
           alt={alt}
-          className="w-full h-auto"
+          className={imgClass}
         />
       ) : (
         <div className="w-full bg-gray-200 min-h-[200px]" />

@@ -11,6 +11,25 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
     apple: "/favicon.png",
   },
+  openGraph: {
+    title: "Kyra Chhiu-Lim | Visual Designer",
+    description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Kyra Chhiu-Lim Visual Designer Portfolio",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kyra Chhiu-Lim | Visual Designer",
+    description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
