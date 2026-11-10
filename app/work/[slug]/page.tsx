@@ -90,16 +90,27 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
           <div className={`mb-8 md:mb-16 ${slug === "dp5" ? "mt-[38px] md:mt-[146px] mx-4 md:mx-16" : "-mx-6 md:-mx-12"}`}>
             <div className='relative'>
               <div className='relative block w-full'>
-                <ClickableImage src={project.coverImage} alt={project.title}>
-                  <Image
+                {project.coverImage.endsWith(".mp4") ? (
+                  <video
                     src={project.coverImage}
-                    alt={project.title}
-                    width={1920}
-                    height={1080}
-                    quality={75}
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
                     className="w-full h-auto"
                   />
-                </ClickableImage>
+                ) : (
+                  <ClickableImage src={project.coverImage} alt={project.title}>
+                    <Image
+                      src={project.coverImage}
+                      alt={project.title}
+                      width={1920}
+                      height={1080}
+                      quality={75}
+                      className="w-full h-auto"
+                    />
+                  </ClickableImage>
+                )}
                 {project.overlayImage && (
                   <Image
                     src={project.overlayImage}
@@ -379,9 +390,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     return (
                       <div key={j} className="bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8">
                         {img.endsWith('.mp4') ? (
-                          <div className="cursor-pointer" onClick={() => {}}>
-                            <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
-                          </div>
+                          <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
                         ) : isFullResImage ? (
                           <ClickableImage src={img} alt={`Project image ${j + 1}`}>
                             <img
@@ -667,18 +676,34 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       section.images.length === 2 ? 'grid-cols-1 md:grid-cols-2 place-items-center' :
                       'grid-cols-1 md:grid-cols-2 lg:grid-cols-3 place-items-center'
                     }`}>
-                      {section.images.map((img, j) => (
-                        <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
-                          <Image
-                            src={img}
-                            alt={`${section.title || 'Project image'} ${j + 1}`}
-                            width={2600}
-                            height={1733}
-                            quality={75}
-                            className="w-auto h-auto max-w-[28rem] sm:max-w-[36rem] md:max-w-[48rem] max-h-[75vh] object-contain"
-                          />
-                        </ClickableImage>
-                      ))}
+                      {section.images.map((img, j) => {
+                        if (img.endsWith('.mp4')) {
+                          return (
+                            <div key={j} className="cursor-pointer">
+                              <video
+                                src={img}
+                                className="w-auto h-auto max-w-[28rem] sm:max-w-[36rem] md:max-w-[48rem] max-h-[75vh] object-contain rounded-lg"
+                                muted
+                                autoPlay
+                                loop
+                                playsInline
+                              />
+                            </div>
+                          );
+                        }
+                        return (
+                          <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
+                            <Image
+                              src={img}
+                              alt={`${section.title || 'Project image'} ${j + 1}`}
+                              width={2600}
+                              height={1733}
+                              quality={75}
+                              className="w-auto h-auto max-w-[28rem] sm:max-w-[36rem] md:max-w-[48rem] max-h-[75vh] object-contain"
+                            />
+                          </ClickableImage>
+                        );
+                      })}
                     </div>
                   );
                 }
@@ -693,7 +718,21 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     {section.images.map((img, j) => {
                       const isVideo = img.endsWith('.mp4');
                       const isFullResImage = img.includes('barista-thumbnail') || img.includes('email/mockup') || img.includes('print/mockup');
-                      if (isVideo || isFullResImage) {
+                      if (isVideo) {
+                        return (
+                          <div key={j} className="cursor-pointer">
+                            <video
+                              src={img}
+                              className="w-full h-auto rounded-lg"
+                              muted
+                              autoPlay
+                              loop
+                              playsInline
+                            />
+                          </div>
+                        );
+                      }
+                      if (isFullResImage) {
                         return (
                           <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
                             <img

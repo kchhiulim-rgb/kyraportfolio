@@ -34,6 +34,8 @@ export default function HoverImage({ src, alt, className, lightbox = true }: Hov
     }
   };
 
+  const isVideo = src?.endsWith(".mp4");
+
   if (src) {
     return (
       <div
@@ -48,18 +50,36 @@ export default function HoverImage({ src, alt, className, lightbox = true }: Hov
         onDoubleClick={handleDoubleClick}
         style={{ overflow: "visible" }}
       >
-        <img
-          src={src}
-          alt={alt}
-          className="absolute inset-0 w-full h-full object-cover transition-all duration-300 ease-out"
-          style={{
-            transform: isHovered
-              ? `scale(0.85) translate(${cursorPos.x * 0.4}px, ${cursorPos.y * 0.4}px)`
-              : "scale(1)",
-            boxShadow: isHovered ? "0 25px 50px rgba(0, 0, 0, 0.25)" : "none",
-            zIndex: isHovered ? 10 : 1,
-          }}
-        />
+        {isVideo ? (
+          <video
+            src={src}
+            muted
+            autoPlay
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-300 ease-out"
+            style={{
+              transform: isHovered
+                ? `scale(0.85) translate(${cursorPos.x * 0.4}px, ${cursorPos.y * 0.4}px)`
+                : "scale(1)",
+              boxShadow: isHovered ? "0 25px 50px rgba(0, 0, 0, 0.25)" : "none",
+              zIndex: isHovered ? 10 : 1,
+            }}
+          />
+        ) : (
+          <img
+            src={src}
+            alt={alt}
+            className="absolute inset-0 w-full h-full object-cover transition-all duration-300 ease-out"
+            style={{
+              transform: isHovered
+                ? `scale(0.85) translate(${cursorPos.x * 0.4}px, ${cursorPos.y * 0.4}px)`
+                : "scale(1)",
+              boxShadow: isHovered ? "0 25px 50px rgba(0, 0, 0, 0.25)" : "none",
+              zIndex: isHovered ? 10 : 1,
+            }}
+          />
+        )}
       </div>
     );
   }
