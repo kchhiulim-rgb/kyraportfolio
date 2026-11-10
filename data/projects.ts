@@ -136,10 +136,10 @@ export const projects: Project[] = [
         images: [],
         videos: [
           { src: "/videos/fulcrum/FrenchGuysReelCC.mp4", thumbnail: "/videos/fulcrum/french-guys-thumbnail.jpg" },
-          { src: "/videos/fulcrum/70-and-sunny-reel_compressed.mp4", thumbnail: "/videos/fulcrum/70-and-sunny-thumbnail.JPG" },
+          { src: "/videos/fulcrum/70-and-sunny-reel_compressed.mp4", thumbnail: "/videos/fulcrum/70-and-sunny-thumbnail.jpg" },
           { src: "/videos/fulcrum/coffee-tab-reel-resynced-white-subtitles_compressed.mp4", thumbnail: "/videos/fulcrum/coffee-tab-thumbnail-new.jpg" },
           { src: "/videos/fulcrum/friend-museum-reel-synced.mp4", thumbnail: "/videos/fulcrum/friend-museum-thumbnail.jpg" },
-          { src: "/videos/fulcrum/bonito-reel-final-synced.mp4", thumbnail: "/videos/fulcrum/bonito-thumbnail.JPEG" },
+          { src: "/videos/fulcrum/bonito-reel-final-synced.mp4", thumbnail: "/videos/fulcrum/bonito-thumbnail.jpeg" },
           { src: "/videos/fulcrum/indi-chocolate-reel.mp4", thumbnail: "/videos/fulcrum/indi-chocolate-thumbnail.jpg" },
         ],
       },
