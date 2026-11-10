@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.kyrachhiu-lim.com"),
   title: "Kyra Chhiu-Lim | Visual Designer",
   description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
+  verification: {
+    google: "3ff062176c703827",
+  },
   icons: {
     icon: "/favicon.png?v=2",
     apple: "/favicon.png?v=2",
