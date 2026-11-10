@@ -7,6 +7,7 @@ import HoverToPlayGif from './HoverToPlayGif';
 import ClickableImage from './ClickableImage';
 import VideoScrollWheel from './VideoScrollWheel';
 import LazyVideo from './LazyVideo';
+import FeedPostCarousel from './FeedPostCarousel';
 
 
 interface Section {
@@ -32,6 +33,7 @@ interface Section {
   afterOverlap?: string[];
   firstRow?: string;
   secondRow?: string[];
+  feedItems?: ({ type: 'carousel'; images: string[]; aspectRatio?: string } | { type: 'post'; src: string })[];
 }
 
 interface FulcrumSectionsProps {
@@ -83,7 +85,8 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
 
   // Collect section titles for the table of contents
   // Merge "Problem:" and "Solution:" into a single "THE BRAND" entry
-  // Nest "Single Origin Coffee Educational Series" and "Small Business Highlight Reels" under "Social Media"
+  // Nest "Instagram Story Highlights", "Featured Feed Posts", "Single Origin Reels Series",
+  // and "Small Business Highlight Reels Series" under "Social Media" as subheaders
   const tocItems: { title: string; index: number; children?: { title: string; index: number }[] }[] = sections
     .map((section, idx) => {
       let title = section.title;
@@ -101,9 +104,9 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
         }
         return acc;
       }
-      // Check if the previous item is "Social Media" and current item is a sub-item
+      // Check if the previous item is "Social Media" and current item is a subheader
       const lastItem = acc[acc.length - 1];
-      if (lastItem && lastItem.title === 'Social Media' && (item.title === 'Single Origin Coffee Educational Series' || item.title === 'Small Business Highlight Reels' || item.title === 'Instagram Story Highlights')) {
+      if (lastItem && lastItem.title === 'Social Media' && (item.title === 'Instagram Story Highlights' || item.title === 'Featured Feed Posts' || item.title === 'Single Origin Reels Series' || item.title === 'Small Business Highlight Reels Series')) {
         if (!lastItem.children) lastItem.children = [];
         lastItem.children.push({ title: item.title, index: item.index });
         return acc;
@@ -264,7 +267,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className={isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-4 md:p-6 flex flex-col" : "flex flex-col"}>
                   {section.pdf.title && (
-                    <h3 className="font-heading font-bold text-lg md:text-xl mb-4 flex-shrink-0" style={{ fontWeight: 900 }}>
+                    <h3 className="font-heading text-lg md:text-xl mb-4 flex-shrink-0">
                       {section.pdf.title}
                     </h3>
                   )}
@@ -274,7 +277,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                 </div>
                 <div className={isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-4 md:p-6 flex flex-col" : "flex flex-col"}>
                   {nextSection.pdf.title && (
-                    <h3 className="font-heading font-bold text-lg md:text-xl mb-4 flex-shrink-0" style={{ fontWeight: 900 }}>
+                    <h3 className="font-heading text-lg md:text-xl mb-4 flex-shrink-0">
                       {nextSection.pdf.title}
                     </h3>
                   )}
@@ -297,12 +300,20 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
         }
 
         if (section.videos && section.videos.length > 0) {
+          const isSocialMediaChild = section.title === 'Single Origin Reels Series' || section.title === 'Small Business Highlight Reels Series';
           return (
             <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
               {section.title && (
-                <h3 id={`section-${i}`} className="font-heading font-bold text-lg md:text-xl mb-4">
-                  {section.title}
-                </h3>
+                <div id={`section-${i}`}>
+                  {isSocialMediaChild && (
+                    <p className="font-body text-sm uppercase text-gray-500 mb-1">
+                      Social Media
+                    </p>
+                  )}
+                  <h3 className="font-heading text-lg md:text-xl mb-4">
+                    {section.title}
+                  </h3>
+                </div>
               )}
               {section.content && (
                 <div className="max-w-4xl space-y-4 mb-6">
@@ -444,16 +455,67 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
           );
         }
 
+        // Feed Posts: masonry layout with shuffled carousels and individual posts
+        if (section.feedItems && section.feedItems.length > 0) {
+          const isSocialMediaChild = section.title === 'Featured Feed Posts';
+          return (
+            <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
+              {section.title && (
+                <div id={`section-${i}`} className="pl-12 pr-12">
+                  {isSocialMediaChild && (
+                    <p className="font-body text-sm uppercase text-gray-500 mb-1">
+                      Social Media
+                    </p>
+                  )}
+                  <h3
+                    className="font-heading text-xl md:text-2xl mb-6"
+                  >
+                    {section.title}
+                  </h3>
+                </div>
+              )}
+              <div className="columns-1 md:columns-2 lg:columns-4 gap-4 px-12 space-y-4">
+                {section.feedItems.map((item, idx) => (
+                  <div key={idx} className="break-inside-avoid">
+                    {item.type === 'carousel' ? (
+                      <FeedPostCarousel images={item.images} aspectRatio={item.aspectRatio} onVideoClick={() => setPopupVideo(item.images.find(img => img.endsWith('.mp4')) || '')} />
+                    ) : item.src.endsWith('.mp4') ? (
+                      <div className="cursor-pointer" onClick={() => setPopupVideo(item.src)}>
+                        <LazyVideo src={item.src} className="w-full h-auto rounded-lg" />
+                      </div>
+                    ) : (
+                      <img
+                        src={item.src}
+                        alt={`Feed post ${idx + 1}`}
+                        className="w-full h-auto rounded-lg"
+                        loading="lazy"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        }
+
+        const isSocialMediaChild = section.title === 'Instagram Story Highlights';
+        const isBoldHeader = section.title === 'Barista Training Manual Redesign' || section.title === 'Newsletter for B2B and B2C Communications';
         return (
           <div key={i} className={`mb-12 md:mb-16 ${isFulcrum ? "bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8" : ""}`}>
             {section.title && (
-              <h3
-                id={`section-${i}`}
-                className={`font-heading font-bold text-xl md:text-2xl mb-4 ${section.content || (section.images && section.images.length > 0) ? 'pl-12' : 'pl-12'}`}
-                style={{ fontWeight: 700 }}
-              >
-                {section.title}
-              </h3>
+              <div id={`section-${i}`}>
+                {isSocialMediaChild && (
+                  <p className="font-body text-sm uppercase text-gray-500 mb-1 pl-12">
+                    Social Media
+                  </p>
+                )}
+                <h3
+                  className={`font-heading text-xl md:text-2xl mb-4 ${section.content || (section.images && section.images.length > 0) ? 'pl-12' : 'pl-12'}`}
+                  style={isBoldHeader ? { fontWeight: 700 } : undefined}
+                >
+                  {section.title}
+                </h3>
+              </div>
             )}
             {section.content && (
               <div className={`${section.padding || 'pl-12 pr-12'} ${section.isCompactText ? 'space-y-2' : 'space-y-4'}`}>

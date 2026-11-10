@@ -14,6 +14,7 @@ export interface Project {
   sections?: {
     title: string;
     content: string;
+    subheader?: string;
     images?: string[];
     nameTag?: string;
     badges?: string[];
@@ -37,6 +38,7 @@ export interface Project {
     firstRow?: string;
     secondRow?: string[];
     isStatsBox?: boolean;
+    feedItems?: ({ type: 'carousel'; images: string[]; aspectRatio?: string } | { type: 'post'; src: string })[];
   }[];
 }
 
@@ -112,7 +114,28 @@ export const projects: Project[] = [
         images: ["/projects/fulcrum/fallmenu.mp4", "/projects/fulcrum/brands.mp4", "/projects/fulcrum/learn-more.mp4"],
       },
       {
-        title: "Single Origin Coffee Educational Series",
+        title: "Featured Feed Posts",
+        content: "",
+        images: [],
+        feedItems: [
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/single-origin-colombia-2026.png", "/projects/fulcrum/feed-posts/pink-bourbon.png", "/projects/fulcrum/feed-posts/sidra-bourbon.png"] },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/cold-brew-cold-foam.mp4" },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/now-roasting-mexico-santoli.png", "/projects/fulcrum/feed-posts/mexico-santoli-info.png"] },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/focaccia-reel.mp4" },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/cold-brew-pour.mp4" },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/feed-post-2.png" },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/all-drinks-labeled.png", "/projects/fulcrum/feed-posts/all-drinks.png"] },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/ignacio-brother-post-graphic.jpg" },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/world-coffee-2026-artboard-2.png", "/projects/fulcrum/feed-posts/world-coffee-2026-artboard-1.png", "/projects/fulcrum/feed-posts/world-coffee-2026-artboard-1-copy.png", "/projects/fulcrum/feed-posts/world-coffee-2026-artboard-1-copy-2.png"] },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/fall-cafe-highlights-2025.png", "/projects/fulcrum/feed-posts/hood-famous-carousel.mp4", "/projects/fulcrum/feed-posts/pinoyshki-carousel.mp4", "/projects/fulcrum/feed-posts/zeitgeist-carousel.mp4"] },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/thailand-single-origins-01.png", "/projects/fulcrum/feed-posts/thailand-single-origins-02.png", "/projects/fulcrum/feed-posts/thailand-single-origins-04.png", "/projects/fulcrum/feed-posts/thailand-single-origins-06.png"] },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/summer-reel-25-synced.mp4" },
+          { type: 'post', src: "/projects/fulcrum/feed-posts/subscription-graphic.png" },
+          { type: 'carousel', images: ["/projects/fulcrum/feed-posts/launch-post-2-01.png", "/projects/fulcrum/feed-posts/launch-post-2-02.png", "/projects/fulcrum/feed-posts/launch-post-2-03.png", "/projects/fulcrum/feed-posts/launch-post-2-04.png", "/projects/fulcrum/feed-posts/launch-post-2-05.png"] },
+        ],
+      },
+      {
+        title: "Single Origin Reels Series",
         content: "",
         images: [],
         videos: [
@@ -131,7 +154,7 @@ export const projects: Project[] = [
         images: [],
       },
       {
-        title: "Small Business Highlight Reels",
+        title: "Small Business Highlight Reels Series",
         content: "",
         images: [],
         videos: [
@@ -160,7 +183,7 @@ export const projects: Project[] = [
         content: "",
         pdf: {
           src: "/barista-old.pdf",
-          title: "Old Version Barista Fundamentals",
+          title: "2018 Barista Fundamentals",
         },
       },
       {
@@ -168,7 +191,7 @@ export const projects: Project[] = [
         content: "",
         pdf: {
           src: "/barista-new.pdf",
-          title: "Barista Fundamentals 2026 Redesign",
+          title: "2026 Barista Fundamentals",
           disclaimer: "*Select blank pages omitted, page numbers do not accurately reflect print ready version",
         },
       },
@@ -243,11 +266,39 @@ export const projects: Project[] = [
         title: "Program Book",
         content: "",
         images: ["/projects/14th-saaaff/program/flip.mp4"],
+        pdf: {
+          src: "/projects/14th-saaaff/program/saaff-2026-programming-guide-5-18.pdf",
+        },
+      },
+      {
+        title: "Featured Feed Posts",
+        content: "",
+        images: [],
+        feedItems: [
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/ran-som.png" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/saaff-2026-festival-ticket-sales-with-color-left.png" },
+          { type: 'carousel', images: ["/projects/14th-saaaff/feed-posts/opening-night-graphic.png", "/projects/14th-saaaff/feed-posts/dj-magic-sean-opening-night.png", "/projects/14th-saaaff/feed-posts/slone-opening-night.png", "/projects/14th-saaaff/feed-posts/viper-fengz-opening-night.png"] },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/saaff-2026-instagram-poster-sponsors.png" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/chowmein-holiday.png" },
+          { type: 'carousel', images: ["/projects/14th-saaaff/feed-posts/saaff2026merch-edited-00964.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08095.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08168.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08203.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08222.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08244.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-08499.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-1070791.jpg", "/projects/14th-saaaff/feed-posts/saaff2026merch-edited-1070788.jpg"], aspectRatio: "3/4" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/saaff-2026-schedule-insta.png" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/opening-night-program.png" },
+          { type: 'carousel', images: ["/projects/14th-saaaff/feed-posts/final-awards-saaff-award-emerging.png", "/projects/14th-saaaff/feed-posts/final-awards-saaff-award-feature.png", "/projects/14th-saaaff/feed-posts/final-awards-saaff-award-short.png"] },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/how-to-fest-v2-a.png" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/saaff-virtualfest2026.png" },
+          { type: 'post', src: "/projects/14th-saaaff/feed-posts/saaff-filmmaker-brunch-2026.png" },
+        ],
       },
       {
         title: "Merchandise",
+        subheader: "T-SHIRTS • TOTE BAGS • STICKERS • BADGES",
         content: "",
         images: ["/projects/14th-saaaff/merch/shirt.mp4"],
+      },
+      {
+        title: "",
+        content: "",
+        images: ["/projects/14th-saaaff/merch/tote-black.png", "/projects/14th-saaaff/merch/tote-red.png"],
       },
       {
         title: "",
@@ -264,11 +315,6 @@ export const projects: Project[] = [
           "/projects/14th-saaaff/merch/badges/apicat-saaff-badge.png",
           "/projects/14th-saaaff/merch/badges/viper-fengz.png",
         ],
-      },
-      {
-        title: "",
-        content: "",
-        images: ["/projects/14th-saaaff/merch/tote-black.png", "/projects/14th-saaaff/merch/tote-red.png"],
       },
       {
         title: "Feature on The International Examiner",

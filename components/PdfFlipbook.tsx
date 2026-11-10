@@ -96,9 +96,12 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
         const pdfDoc = await pdf.promise;
         const images: string[] = [];
 
+        // Use higher scale for sharper rendering - accounts for stretch sizing and high-DPI displays
+        const scale = Math.max(3, window.devicePixelRatio * 2);
+
         for (let i = 1; i <= pdfDoc.numPages; i++) {
           const page = await pdfDoc.getPage(i);
-          const viewport = page.getViewport({ scale: 2 });
+          const viewport = page.getViewport({ scale });
 
           const canvas = document.createElement('canvas');
           canvas.width = viewport.width;
@@ -145,8 +148,8 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
         </p>
       )}
       <div
-        className={`bg-transparent rounded-lg ${isLongPressing ? 'cursor-grabbing' : 'cursor-pointer'}`}
-        style={{ width: bookSize.width, height: bookSize.height, maxWidth: '100%' }}
+        className={`bg-transparent rounded-lg w-full ${isLongPressing ? 'cursor-grabbing' : 'cursor-pointer'}`}
+        style={{ height: bookSize.height }}
         title="Hold to open full-screen"
       >
         {loading ? (
@@ -168,7 +171,7 @@ export default function PdfFlipbook({ src, title }: PdfFlipbookProps) {
             minHeight={141}
             maxWidth={bookSize.width}
             maxHeight={bookSize.height}
-            size="fixed"
+            size="stretch"
             showCover={true}
             startPage={0}
             startZIndex={0}

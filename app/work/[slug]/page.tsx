@@ -14,6 +14,7 @@ import ClickableImage from "@/components/ClickableImage";
 import VideoScrollWheel from "@/components/VideoScrollWheel";
 import FulcrumSections from "@/components/FulcrumSections";
 import LazyVideo from "@/components/LazyVideo";
+import FeedPostCarousel from "@/components/FeedPostCarousel";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -491,12 +492,21 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                 <hr className="border-t border-gray-300 my-8 md:my-12" />
               )}
               {section.title && (
-                <h3
-                  className="font-heading font-bold text-xl md:text-2xl mb-4"
-                  style={{ fontWeight: 700 }}
-                >
-                  {section.title}
-                </h3>
+                <div className="flex flex-col mb-4">
+                  <h3
+                    className="font-heading font-bold text-xl md:text-2xl"
+                    style={{ fontWeight: 700 }}
+                  >
+                    {section.title}
+                  </h3>
+                  {section.subheader && (
+                    <p
+                      className="font-heading text-sm md:text-base uppercase tracking-wide mt-1"
+                    >
+                      {section.subheader}
+                    </p>
+                  )}
+                </div>
               )}
               {section.content && (
                 <div className="space-y-4 mb-6">
@@ -828,9 +838,36 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                   })()}
                 </>
               )}
+              {/* Feed Posts: masonry layout */}
+              {section.feedItems && section.feedItems.length > 0 && (
+                <div className="mt-6">
+                  <div className="columns-1 md:columns-2 lg:columns-4 gap-4 space-y-4">
+                    {section.feedItems.map((item, idx) => (
+                      <div key={idx} className="break-inside-avoid">
+                        {item.type === 'carousel' ? (
+                          <FeedPostCarousel images={item.images} aspectRatio={item.aspectRatio} />
+                        ) : item.src.endsWith('.mp4') ? (
+                          <LazyVideo src={item.src} className="w-full h-auto rounded-lg" />
+                        ) : (
+                          <img
+                            src={item.src}
+                            alt={`Feed post ${idx + 1}`}
+                            className="w-full h-auto rounded-lg"
+                            loading="lazy"
+                          />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               {/* PDF Viewer */}
               {section.pdf && (
-                <PdfSection src={section.pdf.src} title={section.pdf.title} />
+                <div className={`mt-6 grid gap-4 ${
+                  section.images?.length === 1 ? 'grid-cols-1 place-items-center' : ''
+                }`}>
+                  <PdfSection src={section.pdf.src} title={section.pdf.title} />
+                </div>
               )}
             </div>
           );
