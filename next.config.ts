@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   images: {
-    qualities: [75, 100],
+    qualities: [75],
     dangerouslyAllowSVG: true,
     formats: ["image/avif", "image/webp"],
     remotePatterns: [

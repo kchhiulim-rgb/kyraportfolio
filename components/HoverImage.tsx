@@ -29,7 +29,7 @@ export default function HoverImage({ src, alt, className, lightbox = true }: Hov
     if (lightbox && src) {
       e.preventDefault();
       e.stopPropagation();
-      const mediaType = src.endsWith(".gif") ? "gif" : "image";
+      const mediaType = src.endsWith(".mp4") ? "video" : "image";
       openLightbox({ src, alt, type: mediaType });
     }
   };

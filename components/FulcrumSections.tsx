@@ -239,7 +239,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                               alt={`${section.title} image ${j + 1}`}
                               width={2600}
                               height={1733}
-                              quality={100}
+                              quality={75}
                               className="w-full h-auto"
                             />
                           </ClickableImage>
@@ -258,7 +258,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                               alt={`${nextSection.title} image ${j + 1}`}
                               width={2600}
                               height={1733}
-                              quality={100}
+                              quality={75}
                               className="w-full h-auto"
                             />
                           </ClickableImage>
@@ -364,8 +364,6 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                         <div key={j} className="cursor-pointer" onClick={() => setPopupVideo(img)}>
                           <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
                         </div>
-                      ) : img.endsWith('.gif') ? (
-                        <HoverToPlayGif src={img} alt={`Project image ${j + 1}`} autoplay={img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif')} />
                       ) : isFullResImage ? (
                         <ClickableImage src={img} alt={`Project image ${j + 1}`}>
                           <img
@@ -382,7 +380,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                             alt={`Project image ${j + 1}`}
                             width={2600}
                             height={1733}
-                            quality={100}
+                            quality={75}
                             className="w-full h-auto"
                           />
                         </ClickableImage>
@@ -428,14 +426,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                       </div>
                     );
                   }
-                  if (img.endsWith('.gif')) {
-                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif');
-                    return (
-                      <div key={j} className="break-inside-avoid overflow-hidden">
-                        <HoverToPlayGif src={img} alt={`${section.title || 'Project image'} ${j + 1}`} autoplay={isAutoplay} />
-                      </div>
-                    );
-                  }
+                  // GIFs are now converted to MP4 — handled by the .mp4 branch above
                   // If this is tote-mockup.png (not brian-alfred-tote-mockup), render it with black-tote2.png overlapping top-left
                   if (img === '/projects/fulcrum/merch/tote-mockup.png') {
                     return (
@@ -515,9 +506,12 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
             {section.secondRow && section.secondRow.length > 0 && (
               <div className={`mt-6 ${section.padding || 'pl-12 pr-12'} grid gap-4 grid-cols-3`}>
                 {section.secondRow.map((img, j) => {
-                  if (img.endsWith('.gif')) {
-                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card');
-                    return <HoverToPlayGif key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`} autoplay={isAutoplay} />;
+                  if (img.endsWith('.mp4')) {
+                    return (
+                      <div key={j} className="cursor-pointer" onClick={() => setPopupVideo(img)}>
+                        <video src={img} className="w-full h-auto" muted autoPlay loop playsInline />
+                      </div>
+                    );
                   }
                   return (
                     <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
@@ -569,10 +563,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                       />
                     );
                   }
-                  if (img.endsWith('.gif')) {
-                    const isAutoplay = img.includes('tote-gif') || img.includes('valentines-day-card') || img.includes('ezgif');
-                    return <HoverToPlayGif key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`} autoplay={isAutoplay} />;
-                  }
+                  // GIFs are now converted to MP4 — handled by the .mp4 branch above
                   const isFullResImage = img.includes('barista-thumbnail') || img.includes('email/mockup');
                   if (isFullResImage) {
                     return (
@@ -593,7 +584,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                         alt={`${section.title || 'Project image'} ${j + 1}`}
                         width={2600}
                         height={1733}
-                        quality={100}
+                        quality={75}
                         className="w-full h-auto"
                       />
                     </ClickableImage>
@@ -663,7 +654,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                                     alt={`${col.header} cover`}
                                     width={128}
                                     height={128}
-                                    quality={100}
+                                    quality={75}
                                     className="w-full h-full object-cover"
                                   />
                                 </div>
@@ -709,7 +700,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                                 alt={`Column image ${j + 1}`}
                                 width={400}
                                 height={300}
-                                quality={100}
+                                quality={75}
                                 className="w-full h-auto"
                               />
                             </ClickableImage>

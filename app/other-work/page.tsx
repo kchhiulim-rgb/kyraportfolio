@@ -38,7 +38,7 @@ export default function OtherWorkPage() {
                 src={item.image}
                 alt={item.name}
                 className="w-full h-auto object-contain cursor-pointer"
-                onClick={() => openLightbox({ src: item.image, alt: item.name, type: item.image.endsWith(".gif") ? "gif" : "image" })}
+                onClick={() => openLightbox({ src: item.image, alt: item.name, type: item.image.endsWith(".mp4") ? "video" : "image" })}
               />
             ))}
         </div>

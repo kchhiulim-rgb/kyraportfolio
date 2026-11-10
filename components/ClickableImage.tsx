@@ -12,8 +12,8 @@ interface ClickableImageProps {
 export default function ClickableImage({ src, alt, children }: ClickableImageProps) {
   const { openLightbox } = useLightbox();
 
-  const mediaType: "image" | "pdf" | "gif" =
-    src.endsWith(".gif") ? "gif" : src.endsWith(".pdf") ? "pdf" : "image";
+  const mediaType: "image" | "pdf" | "video" =
+    src.endsWith(".mp4") ? "video" : src.endsWith(".pdf") ? "pdf" : "image";
 
   return (
     <div

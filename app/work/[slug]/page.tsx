@@ -96,7 +96,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     alt={project.title}
                     width={1920}
                     height={1080}
-                    quality={100}
+                    quality={75}
                     className="w-full h-auto"
                   />
                 </ClickableImage>
@@ -106,7 +106,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     alt="Digital Natives overlay"
                     width={800}
                     height={800}
-                    quality={100}
+                    quality={75}
                     className="absolute z-10 -top-[calc(10%+30px)] md:-top-[calc(10%+105px)] -left-[calc(10%-15px)] w-auto h-auto max-w-[50%] max-h-[50%] object-contain pointer-events-none"
                   />
                 )}
@@ -244,7 +244,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                                 alt={`${section.title} image ${j + 1}`}
                                 width={2600}
                                 height={1733}
-                                quality={100}
+                                quality={75}
                                 className="w-full h-auto"
                               />
                             </ClickableImage>
@@ -264,7 +264,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                                 alt={`${nextSection.title} image ${j + 1}`}
                                 width={2600}
                                 height={1733}
-                                quality={100}
+                                quality={75}
                                 className="w-full h-auto"
                               />
                             </ClickableImage>
@@ -378,8 +378,10 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     const isFullResImage = img.includes('barista-thumbnail') || img.includes('email/mockup');
                     return (
                       <div key={j} className="bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8">
-                        {img.endsWith('.gif') ? (
-                          <ClickToPlayGif src={img} alt={`Project image ${j + 1}`} />
+                        {img.endsWith('.mp4') ? (
+                          <div className="cursor-pointer" onClick={() => {}}>
+                            <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
+                          </div>
                         ) : isFullResImage ? (
                           <ClickableImage src={img} alt={`Project image ${j + 1}`}>
                             <img
@@ -396,7 +398,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                               alt={`Project image ${j + 1}`}
                               width={2600}
                               height={1733}
-                              quality={100}
+                              quality={75}
                               className="w-full h-auto"
                             />
                           </ClickableImage>
@@ -441,7 +443,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                             alt={`Magazine spread ${gi}-${imgIdx}`}
                             width={2600}
                             height={1733}
-                            quality={100}
+                            quality={75}
                             className="w-full h-auto"
                           />
                         </ClickableImage>
@@ -522,7 +524,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                           alt="Poster mockup"
                           width={2268}
                           height={4032}
-                          quality={100}
+                          quality={75}
                           className="w-full h-auto"
                         />
                       </div>
@@ -533,7 +535,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                           alt="Badge mockup"
                           width={3000}
                           height={2250}
-                          quality={100}
+                          quality={75}
                           className="w-full h-auto"
                         />
                       </div>
@@ -550,7 +552,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                           alt="On prints"
                           width={3000}
                           height={2000}
-                          quality={100}
+                          quality={75}
                           className="w-full h-auto"
                         />
                       </div>
@@ -561,7 +563,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                           alt="Badge mockup"
                           width={3000}
                           height={2250}
-                          quality={100}
+                          quality={75}
                           className="w-full h-auto"
                         />
                       </div>
@@ -579,7 +581,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                             alt="Red tote bag"
                             width={1000}
                             height={1000}
-                            quality={100}
+                            quality={75}
                             className="w-[60%] h-auto ml-auto"
                           />
                         </div>
@@ -590,7 +592,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                             alt="Black tote bag"
                             width={1000}
                             height={1000}
-                            quality={100}
+                            quality={75}
                             className="w-[60%] h-auto"
                           />
                         </div>
@@ -672,7 +674,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                             alt={`${section.title || 'Project image'} ${j + 1}`}
                             width={2600}
                             height={1733}
-                            quality={100}
+                            quality={75}
                             className="w-auto h-auto max-w-[28rem] sm:max-w-[36rem] md:max-w-[48rem] max-h-[75vh] object-contain"
                           />
                         </ClickableImage>
@@ -689,9 +691,9 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
                   }`}>
                     {section.images.map((img, j) => {
-                      const isGif = img.endsWith('.gif');
+                      const isVideo = img.endsWith('.mp4');
                       const isFullResImage = img.includes('barista-thumbnail') || img.includes('email/mockup') || img.includes('print/mockup');
-                      if (isGif || isFullResImage) {
+                      if (isVideo || isFullResImage) {
                         return (
                           <ClickableImage key={j} src={img} alt={`${section.title || 'Project image'} ${j + 1}`}>
                             <img
@@ -710,7 +712,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                             alt={`${section.title || 'Project image'} ${j + 1}`}
                             width={2600}
                             height={1733}
-                            quality={100}
+                            quality={75}
                             className="w-full h-auto"
                           />
                         </ClickableImage>
@@ -745,7 +747,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                                       alt={`${col.header} cover`}
                                       width={128}
                                       height={128}
-                                      quality={100}
+                                      quality={75}
                                       className="w-full h-full object-cover"
                                     />
                                   </div>
@@ -791,7 +793,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                                   alt={`Column image ${j + 1}`}
                                   width={400}
                                   height={300}
-                                  quality={100}
+                                  quality={75}
                                   className="w-full h-auto"
                                 />
                               </ClickableImage>

@@ -62,13 +62,13 @@ export const projects: Project[] = [
       "Graphic design",
     ],
     skills: [],
-    coverImage: "/ezgif-optimized.gif",
+    coverImage: "/ezgif-optimized.mp4",
     images: [],
     sections: [
       {
         title: "",
         content: "",
-        images: ["/ezgif-optimized.gif"],
+        images: ["/ezgif-optimized.mp4"],
       },
       {
         title: "Problem:",
@@ -109,16 +109,16 @@ export const projects: Project[] = [
       {
         title: "",
         content: "",
-        images: ["/projects/fulcrum/fallmenu.gif", "/projects/fulcrum/brands.gif", "/projects/fulcrum/learn-more.gif"],
+        images: ["/projects/fulcrum/fallmenu.mp4", "/projects/fulcrum/brands.mp4", "/projects/fulcrum/learn-more.mp4"],
       },
       {
         title: "Single Origin Coffee Educational Series",
         content: "",
         images: [],
         videos: [
-          { src: "/videos/fulcrum/Colombia Reel V1.mp4", thumbnail: "/videos/fulcrum/Colombia Reel Thumbnail.png" },
-          { src: "/videos/fulcrum/El Salvador Reel Final.mp4", thumbnail: "/videos/fulcrum/El Salvador Thumbnail.png" },
-          { src: "/videos/fulcrum/Reel 5 - Sustaining Community.mp4", thumbnail: "/videos/fulcrum/Sustaining Community Thumbnail.png" },
+          { src: "/videos/fulcrum/Colombia Reel V1_compressed.mp4", thumbnail: "/videos/fulcrum/Colombia Reel Thumbnail.png" },
+          { src: "/videos/fulcrum/El Salvador Reel Final_compressed.mp4", thumbnail: "/videos/fulcrum/El Salvador Thumbnail.png" },
+          { src: "/videos/fulcrum/Reel 5 - Sustaining Community_compressed.mp4", thumbnail: "/videos/fulcrum/Sustaining Community Thumbnail.png" },
           { src: "/videos/fulcrum/HeritageReel4_Final.mp4", thumbnail: "/videos/fulcrum/Heritage Thumbnail.png" },
           { src: "/videos/fulcrum/francisca-reel-2-v2.mp4", thumbnail: "/videos/fulcrum/Francisca Reel Thumbnail.png" },
         ],
@@ -136,8 +136,8 @@ export const projects: Project[] = [
         images: [],
         videos: [
           { src: "/videos/fulcrum/FrenchGuysReelCC.mp4", thumbnail: "/videos/fulcrum/French Guys Thumbnail.jpg" },
-          { src: "/videos/fulcrum/70 and Sunny Reel.mp4", thumbnail: "/videos/fulcrum/70 and Sunny Thumbnail.JPG?v=2" },
-          { src: "/videos/fulcrum/Coffee Tab Reel RESYNCED White Subtitles.mp4", thumbnail: "/videos/fulcrum/Coffee Tab Thumbnail New.jpg" },
+          { src: "/videos/fulcrum/70 and Sunny Reel_compressed.mp4", thumbnail: "/videos/fulcrum/70 and Sunny Thumbnail.JPG" },
+          { src: "/videos/fulcrum/Coffee Tab Reel RESYNCED White Subtitles_compressed.mp4", thumbnail: "/videos/fulcrum/Coffee Tab Thumbnail New.jpg" },
           { src: "/videos/fulcrum/Friend Museum Reel Synced.mp4", thumbnail: "/videos/fulcrum/Friend Museum Thumbnail.jpg" },
           { src: "/videos/fulcrum/Bonito Reel Final Synced.mp4", thumbnail: "/videos/fulcrum/Bonito Thumbnail.JPEG" },
           { src: "/videos/fulcrum/Indi Chocolate Reel.mp4", thumbnail: "/videos/fulcrum/Indi Chocolate Thumbnail.jpg" },
@@ -178,7 +178,7 @@ export const projects: Project[] = [
         gallery: true,
         images: [
           "/projects/fulcrum/merch/brian-alfred-tote-mockup.png",
-          "/projects/fulcrum/merch/tote-gif.gif",
+          "/projects/fulcrum/merch/tote-gif.mp4",
           "/projects/fulcrum/merch/sticker-sheet-master.png",
           "/projects/fulcrum/merch/phone-with-3d-stickers-mockup.png",
           "/projects/fulcrum/merch/sticker-sheet-mockup.png",
@@ -199,9 +199,9 @@ export const projects: Project[] = [
           "We noticed that some of our wholesale customers had trouble navigating our newly remodeled website so I created instructional graphics to teach them to to start online orders. I also expanded on some of the services we provide, such as equipment maintenance and barista training to help customers access the resources available to them.\n\nTo enhance communications with retail customers, I created a Welcome email flow. I planned a 3-part flow series to introduce who we are, dive into our range of coffees, highlight our subscription program, and promote our blog.",
         firstRow: "/projects/fulcrum/merch/welcome-email-mockup.png",
         secondRow: [
-          "/projects/fulcrum/flow1.gif",
-          "/projects/fulcrum/flow2.gif",
-          "/projects/fulcrum/flow3.gif"
+          "/projects/fulcrum/flow1.mp4",
+          "/projects/fulcrum/flow2.mp4",
+          "/projects/fulcrum/flow3.mp4"
         ],
       },
     ],
@@ -225,7 +225,7 @@ export const projects: Project[] = [
       "Print",
     ],
     skills: [],
-    coverImage: "/saaff2026.gif",
+    coverImage: "/saaff2026.mp4",
     images: [],
     sections: [
       {
@@ -242,12 +242,12 @@ export const projects: Project[] = [
       {
         title: "Program Book",
         content: "",
-        images: ["/projects/14th-saaaff/program/flip.gif"],
+        images: ["/projects/14th-saaaff/program/flip.mp4"],
       },
       {
         title: "Merchandise",
         content: "",
-        images: ["/projects/14th-saaaff/merch/shirt.gif"],
+        images: ["/projects/14th-saaaff/merch/shirt.mp4"],
       },
       {
         title: "",
@@ -278,7 +278,7 @@ export const projects: Project[] = [
       {
         title: "",
         content: "",
-        images: ["/projects/14th-saaaff/ie2026.gif"],
+        images: ["/projects/14th-saaaff/ie2026.mp4"],
       },
     ],
   },
@@ -348,7 +348,7 @@ export const projects: Project[] = [
       "Print",
     ],
     skills: [],
-    coverImage: "/saff-2025-popcorn.gif",
+    coverImage: "/saff-2025-popcorn.mp4",
     images: [],
     sections: [
       {
@@ -364,7 +364,7 @@ export const projects: Project[] = [
       {
         title: "",
         content: "",
-        images: ["/projects/13th-saaaff/print/pocket-design.gif"],
+        images: ["/projects/13th-saaaff/print/pocket-design.mp4"],
       },
       {
         title: "",
