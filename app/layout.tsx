@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
     images: [
       {
-        url: "/og-image.png?v=2",
+        url: "/og-image.png?v=3",
         width: 1200,
         height: 630,
         alt: "Kyra Chhiu-Lim Visual Designer Portfolio",
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kyra Chhiu-Lim | Visual Designer",
     description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
-    images: ["/og-image.png?v=2"],
+    images: ["/og-image.png?v=3"],
   },
 };
 
