@@ -136,7 +136,7 @@ export const projects: Project[] = [
         images: [],
         videos: [
           { src: "/videos/fulcrum/FrenchGuysReelCC.mp4", thumbnail: "/videos/fulcrum/French Guys Thumbnail.jpg" },
-          { src: "/videos/fulcrum/70 and Sunny Reel.mp4", thumbnail: "/videos/fulcrum/70 and Sunny Thumbnail.JPG" },
+          { src: "/videos/fulcrum/70 and Sunny Reel.mp4", thumbnail: "/videos/fulcrum/70 and Sunny Thumbnail.JPG?v=2" },
           { src: "/videos/fulcrum/Coffee Tab Reel RESYNCED White Subtitles.mp4", thumbnail: "/videos/fulcrum/Coffee Tab Thumbnail New.jpg" },
           { src: "/videos/fulcrum/Friend Museum Reel Synced.mp4", thumbnail: "/videos/fulcrum/Friend Museum Thumbnail.jpg" },
           { src: "/videos/fulcrum/Bonito Reel Final Synced.mp4", thumbnail: "/videos/fulcrum/Bonito Thumbnail.JPEG" },
