@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   title: "Kyra Chhiu-Lim | Visual Designer",
   description: "Discover Kyra Chhiu-Lim's portfolio of empathetic visual design, including branding, social media, print, and digital projects for diverse clients in Seattle.",
   verification: {
-    google: "3ff062176c703827",
+    google: "xsFB-8a7jvfjoUusQ_c6rAhyFf6Xhf4599Nk069-eRQ",
   },
   icons: {
     icon: "/favicon.png?v=2",
