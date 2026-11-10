@@ -22,7 +22,7 @@ export default function LazyVideo({
   autoPlay = true,
   loop = true,
   playsInline = true,
-  preload = 'none',
+  preload = 'auto',
   onClick,
 }: LazyVideoProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -41,7 +41,11 @@ export default function LazyVideo({
             // Set the source when the video enters the viewport
             video.src = src;
             if (autoPlay) {
-              video.play().catch(() => {});
+              video.load();
+              video.play().catch(() => {
+                // Mobile browsers block autoplay — load metadata so thumbnail shows
+                video.load();
+              });
             }
             if (observerRef.current) {
               observerRef.current.disconnect();
