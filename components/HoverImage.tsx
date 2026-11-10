@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useLightbox } from "@/components/LightboxModal";
+import LazyVideo from "@/components/LazyVideo";
 
 interface HoverImageProps {
   src?: string;
@@ -51,12 +52,8 @@ export default function HoverImage({ src, alt, className, lightbox = true }: Hov
         style={{ overflow: "visible" }}
       >
         {isVideo ? (
-          <video
+          <LazyVideo
             src={src}
-            muted
-            autoPlay
-            loop
-            playsInline
             className="absolute inset-0 w-full h-full object-cover transition-all duration-300 ease-out"
             style={{
               transform: isHovered
@@ -70,6 +67,7 @@ export default function HoverImage({ src, alt, className, lightbox = true }: Hov
           <img
             src={src}
             alt={alt}
+            loading="lazy"
             className="absolute inset-0 w-full h-full object-cover transition-all duration-300 ease-out"
             style={{
               transform: isHovered

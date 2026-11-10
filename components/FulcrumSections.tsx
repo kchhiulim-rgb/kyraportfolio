@@ -6,28 +6,8 @@ import PdfSection from './PdfSection';
 import HoverToPlayGif from './HoverToPlayGif';
 import ClickableImage from './ClickableImage';
 import VideoScrollWheel from './VideoScrollWheel';
+import LazyVideo from './LazyVideo';
 
-function AutoplayVideo({ src, className }: { src: string; className?: string }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    const v = ref.current;
-    if (!v) return;
-    const p = v.play().catch(() => {});
-    return () => { if (p) p.catch(() => {}); };
-  }, [src]);
-  return (
-    <video
-      ref={ref}
-      src={src}
-      className={className}
-      muted
-      autoPlay
-      loop
-      playsInline
-      preload="auto"
-    />
-  );
-}
 
 interface Section {
   title: string;
@@ -362,7 +342,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                         <PdfSection src={img} />
                       ) : img.endsWith('.mp4') ? (
                         <div key={j} className="cursor-pointer" onClick={() => setPopupVideo(img)}>
-                          <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
+                          <LazyVideo src={img} className="w-full h-auto rounded-lg" />
                         </div>
                       ) : isFullResImage ? (
                         <ClickableImage src={img} alt={`Project image ${j + 1}`}>
@@ -418,11 +398,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                         className="break-inside-avoid overflow-hidden cursor-pointer"
                         onClick={() => setPopupVideo(img)}
                       >
-                        {isAutoplay ? (
-                          <AutoplayVideo src={img} className="w-full" />
-                        ) : (
-                          <video src={img} className="w-full" muted autoPlay loop playsInline />
-                        )}
+                        <LazyVideo src={img} className="w-full" />
                       </div>
                     );
                   }
@@ -509,7 +485,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                   if (img.endsWith('.mp4')) {
                     return (
                       <div key={j} className="cursor-pointer" onClick={() => setPopupVideo(img)}>
-                        <video src={img} className="w-full h-auto" muted autoPlay loop playsInline />
+                        <LazyVideo src={img} className="w-full h-auto" />
                       </div>
                     );
                   }
@@ -547,7 +523,7 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                           className="cursor-pointer"
                           onClick={() => setPopupVideo(img)}
                         >
-                          <AutoplayVideo
+                          <LazyVideo
                             src={img}
                             className="w-full h-auto rounded-lg"
                           />
@@ -555,11 +531,11 @@ export default function FulcrumSections({ sections, isFulcrum }: FulcrumSections
                       );
                     }
                     return (
-                      <video
+                      <LazyVideo
                         key={j}
                         src={img}
-                        controls
                         className="w-full h-auto rounded-lg"
+                        autoPlay={false}
                       />
                     );
                   }

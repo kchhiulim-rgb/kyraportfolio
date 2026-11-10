@@ -13,6 +13,7 @@ import ClickToPlayGif from "@/components/ClickToPlayGif";
 import ClickableImage from "@/components/ClickableImage";
 import VideoScrollWheel from "@/components/VideoScrollWheel";
 import FulcrumSections from "@/components/FulcrumSections";
+import LazyVideo from "@/components/LazyVideo";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -60,15 +61,10 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
       {/* Background video for Fulcrum page */}
       {isFulcrum && (
         <div className="fixed inset-0 -z-10 overflow-hidden">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
+          <LazyVideo
+            src="/roaster-video.mp4"
             className="min-w-full min-h-full absolute object-cover"
-          >
-            <source src="/roaster-video.mp4" type="video/mp4" />
-          </video>
+          />
         </div>
       )}
       <div
@@ -91,12 +87,8 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
             <div className='relative'>
               <div className='relative block w-full'>
                 {project.coverImage.endsWith(".mp4") ? (
-                  <video
+                  <LazyVideo
                     src={project.coverImage}
-                    muted
-                    autoPlay
-                    loop
-                    playsInline
                     className="w-full h-auto"
                   />
                 ) : (
@@ -390,7 +382,7 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                     return (
                       <div key={j} className="bg-white/75 backdrop-blur-sm rounded-lg p-6 md:p-8">
                         {img.endsWith('.mp4') ? (
-                          <video src={img} className="w-full h-auto rounded-lg" muted autoPlay loop playsInline />
+                          <LazyVideo src={img} className="w-full h-auto rounded-lg" />
                         ) : isFullResImage ? (
                           <ClickableImage src={img} alt={`Project image ${j + 1}`}>
                             <img
@@ -680,13 +672,9 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                         if (img.endsWith('.mp4')) {
                           return (
                             <div key={j} className="cursor-pointer">
-                              <video
+                              <LazyVideo
                                 src={img}
                                 className="w-auto h-auto max-w-[28rem] sm:max-w-[36rem] md:max-w-[48rem] max-h-[75vh] object-contain rounded-lg"
-                                muted
-                                autoPlay
-                                loop
-                                playsInline
                               />
                             </div>
                           );
@@ -721,13 +709,9 @@ async function ProjectContent({ params }: { params: Promise<{ slug: string }> })
                       if (isVideo) {
                         return (
                           <div key={j} className="cursor-pointer">
-                            <video
+                            <LazyVideo
                               src={img}
                               className="w-full h-auto rounded-lg"
-                              muted
-                              autoPlay
-                              loop
-                              playsInline
                             />
                           </div>
                         );

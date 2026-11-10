@@ -230,6 +230,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                 muted={muted}
                 playsInline
                 loop
+                preload="none"
                 className="w-full h-full object-cover"
               />
               {/* Thumbnail overlay — hidden on mobile, hover-hidden on desktop */}
@@ -240,6 +241,7 @@ export default function VideoScrollWheel({ videos, muted = true, onToggleMute }:
                   <img
                     src={videoItem.thumbnail}
                     alt=""
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                 </div>

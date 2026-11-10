@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from "react";
 
-type MediaType = "image" | "pdf" | "gif";
+type MediaType = "image" | "pdf" | "gif" | "video";
 
 interface LightboxItem {
   src: string;

@@ -53,6 +53,7 @@ export default function HoverToPlayGif({ src, alt, autoplay = false, fill = fals
         <img
           src={src}
           alt={alt}
+          loading="lazy"
           className={imgClass}
         />
       </div>
@@ -71,12 +72,14 @@ export default function HoverToPlayGif({ src, alt, autoplay = false, fill = fals
         <img
           src={src}
           alt={alt}
+          loading="lazy"
           className={imgClass}
         />
       ) : firstFrame ? (
         <img
           src={firstFrame}
           alt={alt}
+          loading="lazy"
           className={imgClass}
         />
       ) : (

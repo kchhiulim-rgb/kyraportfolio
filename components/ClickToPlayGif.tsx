@@ -53,12 +53,14 @@ export default function ClickToPlayGif({ src, alt }: ClickToPlayGifProps) {
         <img
           src={src}
           alt={alt}
+          loading="lazy"
           className="w-full h-auto"
         />
       ) : firstFrame ? (
         <img
           src={firstFrame}
           alt={alt}
+          loading="lazy"
           className="w-full h-auto"
         />
       ) : (

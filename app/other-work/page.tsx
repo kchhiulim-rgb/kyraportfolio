@@ -37,6 +37,7 @@ export default function OtherWorkPage() {
                 key={index}
                 src={item.image}
                 alt={item.name}
+                loading="lazy"
                 className="w-full h-auto object-contain cursor-pointer"
                 onClick={() => openLightbox({ src: item.image, alt: item.name, type: item.image.endsWith(".mp4") ? "video" : "image" })}
               />
