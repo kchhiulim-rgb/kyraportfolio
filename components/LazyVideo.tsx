@@ -39,7 +39,10 @@ export default function LazyVideo({
           if (entry.isIntersecting && !loaded.current) {
             loaded.current = true;
             // Set the source when the video enters the viewport
-            video.src = src;
+            // Add #t=0.001 media fragment to force iOS Safari to show first frame as thumbnail
+            const url = new URL(src, window.location.origin);
+            url.hash = 't=0.001';
+            video.src = url.toString();
             if (autoPlay) {
               video.load();
               video.play().catch(() => {
